@@ -1,0 +1,19 @@
+//
+// Fonts
+//
+// scss-lint:disable NestingDepth, SelectorDepth
+
+//Bebas
+
+.font-bold{
+  font-family: $font-bold !important;
+  font-weight: 400;
+}
+
+.font-serif{
+  font-family: $font-serif !important;
+}
+
+.font-sans-serif{
+  font-family: $font-sans-serif !important;
+}

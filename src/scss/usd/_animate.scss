@@ -1,0 +1,96 @@
+// scss-lint:disable all
+@charset "UTF-8";
+
+.animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeTopRight {
+  from {
+    opacity: 0;
+    transform-origin: top right;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform-origin: top right;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeTopLeft {
+  from {
+    opacity: 0;
+    transform-origin: top left;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform-origin: top left;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeTop {
+  from {
+    opacity: 0;
+    transform-origin: top;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform-origin: top;
+    transform: translateY(0px);
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.fadeTop {
+  -webkit-animation-name: fadeTop;
+  animation-name: fadeTop;
+}
+
+.fadeTopRight {
+  -webkit-animation-name: fadeTopRight;
+  animation-name: fadeTopRight;
+}
+
+.fadeTopLeft {
+  -webkit-animation-name: fadeTopLeft;
+  animation-name: fadeTopLeft;
+}

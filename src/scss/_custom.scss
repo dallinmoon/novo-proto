@@ -1,0 +1,41 @@
+.peak-hours{
+
+	.peak-hours-bar{
+
+		.peak-hours-bar-item{
+			height: 50px;
+
+			&.low1{
+				background-color: #414833	;
+			}
+			&.low2{
+				background-color: #008000		;
+			}
+			&.low3{
+				background-color: #138808	;
+			}
+			&.low4{
+				background-color: #03C03C	;
+			}
+			&.low5{
+				background-color: #77DD77	;
+			}
+			&.high1{
+				background-color: #FFD700	;
+			}
+			&.high2{
+				background-color: #FFA500		;
+			}
+			&.high3{
+				background-color: #FF8C00	;
+			}
+			&.high4{
+				background-color: #FF4500	;
+			}
+			&.high5{
+				background-color: #E34234		;
+			}
+
+		}
+	}
+}

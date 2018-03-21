@@ -1,0 +1,626 @@
+<div class="usd-content-area usd-content-area-standard animated fadeIn">
+  <div class="row" *ngIf="dataReady">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-lg-4">
+              <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?center={{ gsSiteInfo?.rows[0].maplat }},{{ gsSiteInfo?.rows[0].maplong }}&zoom={{ gsSiteInfo?.rows[0].mapzoom }}&size=800x400&maptype=roadmap&markers=color:blue&key=AIzaSyCRiDbCDdIt-_o1_L2gHWw9268177i6a4Q">
+            </div>
+            <div class="col-lg-4">
+              <div class="row">
+                <div class="col-12">
+                  <h4 class="mb-1 mt-3 mt-lg-0">{{ gsSiteInfo?.rows[0].site }}</h4>
+                  <div class="text-secondary small">
+                    <p class="mb-0">{{ gsSiteInfo?.rows[0].address }}</p>
+                    <p>{{ gsSiteInfo?.rows[0].city }} {{ gsSiteInfo?.rows[0].state }} {{ gsSiteInfo?.rows[0].zip }}</p>
+                  </div>
+                  <p class="mb-0"><strong>Area:</strong> {{ gsSiteInfo?.rows[0].area }} sq. ft.</p>
+                  <p class="mb-0"><strong>Buildings:</strong> {{ gsSiteInfo?.rows[0].buildings }}</p>
+                  <p class="mb-0"><strong>Occupants:</strong> {{ gsSiteInfo?.rows[0].occupants }}</p>
+                  <p class="mb-0"><strong>Type:</strong> {{ gsSiteInfo?.rows[0].type }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <h4>Meters</h4>
+              <div class="list list-sm mb-3">
+                <div class="item bg-gray-lightest py-1">
+                  <div class="avatar avatar-xs bg-danger border-white">
+                    <i class="fas fa-bolt text-light"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <h4 class="mb-0">Power</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="item-end font-bold">12</h1>
+                </div>
+              </div>
+              <div class="list list-sm mb-3">
+                <div class="item bg-gray-lightest py-1">
+                  <div class="avatar avatar-xs bg-info border-white">
+                    <i class="fas fa-tint text-light"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <h4 class="mb-0">Water</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="item-end font-bold">12</h1>
+                </div>
+              </div>
+              <div class="list list-sm mb-0">
+                <div class="item bg-gray-lightest py-1">
+                  <div class="avatar avatar-xs bg-success border-white">
+                    <i class="fas fa-fire text-light"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <h4 class="mb-0">Gas</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="item-end font-bold">05</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title mb-0">Usage History (kWh)</h4>
+          <p class="text-secondary">{{ gsMeters?.rows[4].meterlabel }}</p>
+          <div *ngIf="chart">
+            <canvas id="chartUsageHistory" height="230">{{ chart }}</canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title font-bold mb-0">Site Comparison</h4>
+          <p class="text-muted">Last 24 Hours</p>
+          <p class="mb-0">Best Building</p>
+          <div class="progress" style="height: 25px;">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0.38 kWh</div>
+          </div>
+          <p class="mb-0 mt-2">Goal</p>
+          <div class="progress" style="height: 25px;">
+            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">0.42 kWh</div>
+          </div>
+          <p class="mb-0 mt-2">Median Building</p>
+          <div class="progress" style="height: 25px;">
+            <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">0.73 kWh</div>
+          </div>
+          <p class="mb-0 mt-2">Highest Building</p>
+          <div class="progress" style="height: 25px;">
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">1.93 kWh</div>
+          </div>              
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12, 'card-accent-success': gsCalc?.rows[0].usagehist0 < gsCalc?.rows[0].usagehist12}" class="card">
+        <div class="card-block">
+          <h5 class="card-title">Monthly Total</h5>
+          <h1 class="font-bold">{{ gsCalc?.rows[0].usagehist0 }} <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <div *ngIf="gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12; then overYOY; else underYOY"></div>
+          <ng-template #overYOY>
+            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].yoydiff }} over last year</p>
+          </ng-template>
+          <ng-template #underYOY>
+            <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].yoydiff }} under year</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].highusageoveravg > 0.25, 'card-accent-success': gsCalc?.rows[0].highusageoveravg < 0.25}">
+        <div class="card-block">
+          <h5 class="card-title">High (Past Year)</h5>
+          <h1 class="font-bold">{{ gsCalc?.rows[0].highusage }} <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <div *ngIf="gsCalc?.rows[0].highusageoveravg > 0.25; then overTarget; else underTarget"></div>
+          <ng-template #overTarget>
+            <p class="text-danger mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
+          </ng-template>
+          <ng-template #underTarget>
+            <p class="text-success mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget, 'card-accent-success': gsCalc?.rows[0].usagehistavg < gsCalc?.rows[0].usagehistavgtarget }">
+        <div class="card-block">
+          <h5 class="card-title">Average (Past Year)</h5>
+          <h1 class="font-bold">{{ gsCalc?.rows[0].usagehistavg }} <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <div *ngIf="gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget; then overAvgTarget; else underAvgTarget"></div>
+          <ng-template #overAvgTarget>
+            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} over target</p>
+          </ng-template>
+          <ng-template #underAvgTarget>
+            <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} under target</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Peak Usage</h4>
+          <div *ngIf="chart">
+            <canvas id="chartPeak" height="203">{{ chart }}</canvas>
+          </div>
+          <hr>
+          <div class="row mt-4">
+            <div class="col-6 text-center">
+              <p class="mb-0 text-secondary small">ON PEAK (kWh)</p>
+              <h4 class="font-bold">{{ gsCalc?.rows[0].onpeakusage }}</h4>
+              <div *ngIf="gsCalc?.rows[0].onpeakusage > gsCalc?.rows[0].onpeaktarget; then overOnPkTarget; else underOnPkTarget"></div>
+              <ng-template #overOnPkTarget>
+                <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].onpeakdiff | percent:'1.1-2' }}</p>
+              </ng-template>
+              <ng-template #underOnPkTarget>
+                <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].onpeakdiff | percent:'1.1-2' }}</p>
+              </ng-template>
+            </div>
+            <div class="col-6 text-center">
+              <p class="mb-0 text-secondary small">OFF PEAK (kWh)</p>
+              <h4 class="font-bold">{{ gsCalc?.rows[0].offpeakusage }}</h4>
+              <div *ngIf="gsCalc?.rows[0].offpeakusage > gsCalc?.rows[0].offpeaktarget; then overOffPkTarget; else underOffPkTarget"></div>
+              <ng-template #overOffPkTarget>
+                <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].offpeakdiff | percent:'1.1-2' }}</p>
+              </ng-template>
+              <ng-template #underOffPkTarget>
+                <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].offpeakdiff | percent:'1.1-2' }}</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Peak Cost</h4>
+          <div class="list mb-0">
+            <div class="item">
+              <div class="avatar avatar-sm border-warning bg-white">
+                <i class="fal fa-sun text-warning"></i>
+              </div>
+              <div class="item-inner">
+                <div class="input-wrapper">
+                  <div class="item-label">
+                    <h3 class="mb-0 font-bold">{{ gsCalc?.rows[0].onpeakchg | currency:'USD':true:'2.2-4' }}</h3>
+                    <p class="item-subtitle mb-0">On Peak Cost</p>
+                  </div>
+                </div>
+              </div>
+              <span class="item-end">
+                <div *ngIf="gsCalc?.rows[0].onpeakchg > gdata?.rows[0].onpeakchgtarget; then overOnPkCostTarget; else underOnPkCostTarget"></div>
+                <ng-template #overOnPkCostTarget>
+                  <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].onpeakchgdiff | percent:'1.1-2' }}</p>
+                </ng-template>
+                <ng-template #underOnPkCostTarget>
+                  <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].onpeakchgdiff | percent:'1.1-2' }}</p>
+                </ng-template>
+              </span>
+            </div>
+            <div class="item">
+              <div class="avatar avatar-sm border-info bg-white">
+                <i class="fal fa-moon text-info"></i>
+              </div>
+              <div class="item-inner">
+                <div class="input-wrapper">
+                  <div class="item-label">
+                    <h3 class="mb-0 font-bold">{{ gsCalc?.rows[0].offpeakchg | currency:'USD':true:'2.2-4' }}</h3>
+                    <p class="item-subtitle mb-0">Off Peak Cost</p> 
+                  </div>
+                </div>
+              </div>
+              <span class="item-end">
+                <div *ngIf="gsCalc?.rows[0].offpeakchg > gsCalc?.rows[0].offpeakchgtarget; then overOffPkCostTarget; else underOffPkCostTarget"></div>
+                <ng-template #overOffPkCostTarget>
+                  <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].offpeakchgdiff | percent:'1.1-2' }}</p>
+                </ng-template>
+                <ng-template #underOffPkCostTarget>
+                  <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].offpeakchgdiff | percent:'1.1-2' }}</p>
+                </ng-template>
+              </span>  
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="card-title mb-0 mt-3">Savings</h4>
+              <p class="text-secondary">You are saving on average: {{ gsCalc?.rows[0].peakchgdiff | percent:'1.1-2' }}</p>
+              <div class="progress" style="height: 40px">
+                <div class="progress-bar bg-secondary font-lg" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">{{ gsCalc?.rows[0].totalpeakchg | currency:'USD':true:'1.0-0' }}</div>
+                <div class="progress-bar bg-success font-lg" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                  {{ gsCalc?.rows[0].peakchgsavings | currency:'USD':true:'1.0-2' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Misc Charges</h4>
+          <div *ngIf="chart">
+            <canvas id="chartMisc" height="223">{{ chart }}</canvas>
+          </div>
+          <hr>
+          <div class="row mt-4">
+            <div class="col-12 text-center">
+              <p class="mb-0 text-secondary small">MISC CHARGES</p>
+              <h4 class="font-bold">{{ gsCalc?.rows[0].miscchg | currency:'USD':true:'1.0-2' }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fas fa-usd-circle"></i> Cost vs Budget</h4>
+          <p class="mb-1">SPENT SO FAR <span class="text-secondary">(25 days left)</span></p>
+          <div class="row">
+            <div class="col-9">
+              <div class="progress mb-2" style="height: 52px;">
+                <div class="progress-bar bg-warning font-bold font-lg text-shadow" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">$57,458</div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="text-center bg-white py-1">
+                <h5 class="mb-0 font-bold">$314,910</h5>
+                <small class="text-secondary">Monthly Budget</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p class="text-warning mb-0"><i class="fas fa-caret-up"></i> $4,973 over budget (9%)</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row align-items-center">
+            <div class="col-12">
+              <p class="text-uppercase">Over/Under Daily Budget</p>
+            </div>
+            <div class="col-9">
+              <div *ngIf="chart">
+                <canvas id="projectedBudget" height="100">{{ chart }}</canvas>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="text-center bg-white py-1">
+                <h5 class="mb-0 font-bold">$10,497</h5>
+                <small class="text-secondary">Daily Budget</small>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <p class="text-info mb-0">
+                <span class="text-danger"><i class="fas fa-caret-up"></i> 4 days over</span> / <span class="text-success"><i class="fas fa-caret-down"></i> 1 day under</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary btn-link float-right" (click)="budgetModal.show()">More Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fas fa-bolt"></i> Consumption vs Budget</h4>
+          <p class="mb-1 text-uppercase">Consumption So Far <span class="text-secondary">(25 days left)</span></p>
+          <div class="row">
+            <div class="col-9">
+              <div class="progress mb-2" style="height: 52px;">
+                <div class="progress-bar bg-success font-bold font-lg text-shadow" role="progressbar" style="width: 20%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">774700</div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="text-center bg-white py-1">
+                <h5 class="mb-0 font-bold">4699110</h5>
+                <small class="text-secondary">Monthly Budget</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p class="text-success mb-0"><i class="fas fa-caret-down"></i> 8485 under budget (1%)</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row align-items-center">
+            <div class="col-12">
+              <p class="text-uppercase">Over/Under Daily Budget</p>
+            </div>
+            <div class="col-9">
+              <div *ngIf="chart">
+                <canvas id="projectedUsage" height="100">{{ chart }}</canvas>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="text-center bg-white py-1">
+                <h5 class="mb-0 font-bold">156637</h5>
+                <small class="text-secondary">Daily Budget</small>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <p class="text-info mb-0">
+                <span class="text-danger"><i class="fas fa-caret-up"></i> 1 days over</span> / <span class="text-success"><i class="fas fa-caret-down"></i> 4 day under</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary btn-link float-right" (click)="consumptionModal.show()">More Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fas fa-dollar-sign"></i> Projected Spend</h4>
+          <div class="text-center d-flex justify-content-center mt-4">
+            <div class="rounded-circle p-3 novo-circle border-success d-flex align-items-center justify-content-center">
+              <p class="novo-circle-number mb-0 mt-2 text-success"><i class="fas fa-dollar-sign"></i></p>
+            </div>
+          </div>
+          <h1 class="text-center font-bold mt-3 mb-0">$280,000</h1>
+          <p class="text-center text-secondary mb-2">Projected Spend (Apr 2018)</p>
+          <p class="text-danger text-center mb-3"><i class="fas fa-caret-up"></i> 8% over last year</p>
+          <div *ngIf="chart">
+            <canvas id="budgetProjection" height="150">{{ chart }}</canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fas fa-bolt"></i> Projected Consumption</h4>
+          <div class="text-center d-flex justify-content-center mt-4">
+            <div class="rounded-circle p-3 novo-circle border-warning d-flex align-items-center justify-content-center">
+              <p class="novo-circle-number mb-0 mt-2 text-warning"><i class="fas fa-bolt"></i></p>
+            </div>
+          </div>
+          <h1 class="text-center font-bold mt-3 mb-0">2540000 <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <p class="text-center text-secondary mb-2">Projected Consumption (Apr 2018)</p>
+          <p class="text-success text-center mb-3"><i class="fas fa-caret-down"></i> 8% under last year</p>
+          <div *ngIf="chart">
+            <canvas id="consumptionProjection" height="150">{{ chart }}</canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-novo-equipment">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fas fa-tachometer"></i> Demand</h4>
+          <div class="text-center d-flex justify-content-center mt-4">
+            <div class="rounded-circle p-3 novo-circle d-flex align-items-center justify-content-center">
+              <p class="novo-circle-number mb-0 text-primary"><i class="fas fa-tachometer"></i></p>
+            </div>
+          </div>
+          <h1 class="text-center font-bold mt-4 mb-0">9000000</h1>
+          <p class="text-center text-secondary mb-3">kW Demand</p>
+          <div class="row">
+            <div class="col-12 text-center">
+              <div class="bg-gray-lightest border border-gray py-3 mt-2">
+                <h6 class="mb-3"><strong><i class="fal fa-tachometer"></i> Meter</strong></h6>
+                <p class="text-secondary mb-0 small">kWh</p>
+                <h6>9000000</h6>
+                <p class="text-secondary mb-0 small">kWh / ft<sup>2</sup></p>
+                <h6 class="mb-0">9000000</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-block">
+          <div class="row align-items-center">
+            <div class="col-md-3 mb-3 mb-lg-0">
+              <div class="text-center">
+                <div class="bg-gray-lightest border border-gray py-3">
+                  <p class="mb-3"><strong><i class="fal fa-asterisk"></i> AHUs</strong></p>
+                  <p class="text-secondary mb-0 small">Enabled</p>
+                  <h6>4 of 18</h6>
+                  <p class="text-secondary mb-0 small">% Running</p>
+                  <h6>100%</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div *ngIf="chart">
+                <canvas height="175" id="timeSeries1"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-block">
+          <div class="row align-items-center">
+            <div class="col-md-3 mb-3 mb-lg-0">
+              <div class="text-center">
+                <div class="bg-gray-lightest border border-gray py-3">
+                  <p class="mb-3"><strong><i class="fal fa-lightbulb"></i> Lighting</strong></p>
+                  <p class="text-secondary mb-0 small">Enabled</p>
+                  <h6>200 of 8000</h6>
+                  <p class="text-secondary mb-0 small">% Running</p>
+                  <h6>100%</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div *ngIf="chart">
+                <canvas height="175" id="timeSeries2"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" bsModal #budgetModal="bs-modal" [config]="{backdrop: 'static'}"
+    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Cost vs. Budget Details</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="budgetModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Budget</th>
+              <th scope="col">Spent</th>
+              <th scope="col">Over/Under</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>$10,497</td>
+              <td>$11,997</td>
+              <td class="text-danger">$1,500</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>$10,497</td>
+              <td>$9,997</td>
+              <td class="text-success">- $500</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>$10,497</td>
+              <td>$11,497</td>
+              <td class="text-danger">+ $1000</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>$10,497</td>
+              <td>$10,997</td>
+              <td class="text-danger">+ $500</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>$10,497</td>
+              <td>$12,970</td>
+              <td class="text-danger">+ $2,473</td>
+            </tr>
+            <tr class="bg-gray-lightest">
+              <th scope="row">Total</th>
+              <td>$52,485</td>
+              <td>$57,485</td>
+              <td class="text-danger">+ $4,973</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" bsModal #consumptionModal="bs-modal" [config]="{backdrop: 'static'}"
+    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Consumption vs. Budget Details</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="consumptionModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Budget</th>
+              <th scope="col">Spent</th>
+              <th scope="col">Over/Under</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>156637</td>
+              <td>154137</td>
+              <td class="text-success">-2500</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>156637</td>
+              <td>157137</td>
+              <td class="text-danger">+ 500</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>156637</td>
+              <td>153337</td>
+              <td class="text-success">- 3000</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>156637</td>
+              <td>152952</td>
+              <td class="text-success">- 3685</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>156637</td>
+              <td>157137</td>
+              <td class="text-danger">+ 500</td>
+            </tr>
+            <tr class="bg-gray-lightest">
+              <th scope="row">Total</th>
+              <td>783185</td>
+              <td>774700</td>
+              <td class="text-success">- 8485</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

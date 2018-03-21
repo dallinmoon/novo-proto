@@ -1,0 +1,479 @@
+// IE10&11 Flexbox fix
+@media all and (-ms-high-contrast:none) {
+  html {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// app-dashboard and app-root are Angular2+ selectors. You can add here your own selectors if you need.
+.usd,
+app-dashboard,
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.usd-header {
+  flex: 0 0 $navbar-height;
+}
+
+.usd-footer {
+  flex: 0 0 $footer-height;
+
+  .container-fluid {
+    padding: $spacing-base;
+  }
+}
+
+.usd-body {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
+
+  .usd-main {
+    flex: 1;
+    min-width: 0;
+
+    &.center-v{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container-fluid {
+      padding: 0 $spacing-base;
+    }
+  }
+
+  .usd-sidebar {
+    // $sidebar-width is the width of the columns
+    flex: 0 0 $sidebar-width;
+    // put the nav on the left
+    order: -1;
+  }
+
+  .usd-aside-menu {
+    // $aside-menu-width is the width of the columns
+    flex: 0 0 $aside-menu-width;
+  }
+}
+
+//
+// header
+//
+.header-fixed {
+  .usd-header {
+    position: fixed;
+    z-index: $zindex-sticky;
+    width: 100%;
+
+    .navbar-toggler {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: $navbar-height - 1px;
+      padding: 0;
+      color: $gray-600;
+    }
+
+    .aside-menu-toggler{
+      width: 35px;
+    }
+  }
+  .usd-body {
+    margin-top: $navbar-height;
+  }
+}
+
+//
+// Sidebar
+//
+.sidebar-hidden {
+  .usd-sidebar {
+    margin-left: - $sidebar-width;
+  }
+}
+
+.sidebar-fixed {
+  .usd-sidebar {
+    position: fixed;
+    z-index: $zindex-sticky - 1;
+    width: $sidebar-width;
+    height: calc(100vh - #{$navbar-height});
+    // margin-top: - $navbar-height;
+
+    // .sidebar-nav {
+    //   height: calc(100vh - #{$navbar-height});
+    // }
+  }
+
+  .usd-main, .usd-footer {
+    margin-left: $sidebar-width;
+  }
+
+  &.sidebar-hidden {
+    .usd-main, .usd-footer {
+      margin-left: 0;
+    }
+  }
+}
+
+.sidebar-off-canvas {
+  .usd-sidebar {
+    position: fixed;
+    z-index: $zindex-sticky - 1;
+    height: calc(100vh - #{$navbar-height});
+  }
+}
+
+.simple-layout {
+
+  ng-component{
+    margin-top: 0px;
+  }
+
+  .usd-main.center-v{
+    margin-left: 0px;
+  }
+}
+
+.simple-layout ng-component{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
+
+  .usd-main {
+    flex: 1;
+    min-width: 0;
+
+    &.center-v{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container-fluid {
+      padding: 0 $spacing-base;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .sidebar-compact {
+    .usd-sidebar {
+      flex: 0 0 $sidebar-compact-width;
+    }
+
+    &.sidebar-hidden {
+      .usd-sidebar {
+        margin-left: - $sidebar-compact-width;
+      }
+    }
+
+    &.sidebar-fixed {
+      .usd-main, .usd-footer {
+        margin-left: $sidebar-compact-width;
+      }
+
+      .usd-sidebar {
+        width: $sidebar-compact-width;
+      }
+
+      &.sidebar-hidden {
+        .usd-main, .usd-footer {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .sidebar-minimized {
+    .usd-sidebar {
+      flex: 0 0 $sidebar-minimized-width;
+    }
+
+    &.sidebar-hidden {
+      .usd-sidebar {
+        margin-left: - $sidebar-minimized-width;
+      }
+    }
+
+    &.sidebar-fixed {
+      .usd-main, .usd-footer {
+        margin-left: $sidebar-minimized-width;
+      }
+
+      .usd-sidebar {
+        width: $sidebar-minimized-width;
+      }
+
+      &.sidebar-hidden {
+        .usd-main, .usd-footer {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+//
+// Aside Menu
+//
+.aside-menu-hidden {
+  .usd-aside-menu {
+    margin-right: - $aside-menu-width;
+  }
+}
+
+.aside-menu-fixed {
+  .usd-aside-menu {
+    position: fixed;
+    right: 0;
+    height: 100%;
+
+    .tab-content {
+      height: calc(100vh - #{$aside-menu-nav-padding-y * 2 + $font-size-base} - #{$navbar-height});
+    }
+  }
+
+  .usd-main, .usd-footer {
+    margin-right: $aside-menu-width;
+  }
+
+  &.aside-menu-hidden {
+    .usd-main, .usd-footer {
+      margin-right: 0;
+    }
+  }
+}
+
+.aside-menu-off-canvas {
+  .usd-aside-menu {
+    position: fixed;
+    right: 0;
+    z-index: $zindex-sticky - 1;
+    height: 100%;
+
+    .tab-content {
+      height: calc(100vh - #{$aside-menu-nav-padding-y * 2 + $font-size-base} - #{$navbar-height});
+    }
+  }
+}
+
+//
+// Breadcrumb
+//
+.breadcrumb-fixed {
+  .usd-main {
+    $breadcrumb-height: 2 * $breadcrumb-padding-y + $font-size-base + 1.5 * $spacer;
+    padding-top: $breadcrumb-height;
+  }
+
+  .usd-breadcrumb {
+    position: fixed;
+    top: $navbar-height;
+    right: 0;
+    left: 0;
+    z-index: $zindex-sticky - 2;
+  }
+
+  // if sidebar + main + aside
+  .main:nth-child(2) {
+    .usd-breadcrumb {
+      right: $aside-menu-width;
+      left: $sidebar-width;
+    }
+  }
+
+  // if sidebar + main
+  .main:first-child {
+    .usd-breadcrumb {
+      right: $aside-menu-width;
+      left: 0;
+    }
+  }
+
+  // if  main + aside
+  .main:last-child {
+    .usd-breadcrumb {
+      right: 0;
+    }
+  }
+
+  &.sidebar-minimized {
+    .usd-main .usd-breadcrumb {
+      left: $sidebar-minimized-width;
+    }
+  }
+
+  &.sidebar-hidden, &.sidebar-off-canvas {
+    .usd-main .usd-breadcrumb {
+      left: 0;
+    }
+  }
+
+  &.aside-menu-hidden, &.aside-menu-off-canvas {
+    .usd-main .usd-breadcrumb {
+      right: 0;
+    }
+  }
+}
+
+//
+// Footer
+//
+.footer-fixed {
+  .usd-footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-sticky;
+    height: $footer-height;
+  }
+
+  .usd-body {
+    margin-bottom: $footer-height;
+  }
+}
+
+// Content Area
+
+.usd-content-area-full{
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+//
+// Animations
+//
+.usd-header,
+.usd-footer,
+.usd-sidebar,
+.usd-main,
+.usd-aside-menu {
+  transition: margin-left $layout-transition-speed, margin-right $layout-transition-speed, width $layout-transition-speed, flex $layout-transition-speed;
+}
+.sidebar-nav {
+  transition: width $layout-transition-speed;
+}
+.usd-breadcrumb {
+  transition: left $layout-transition-speed, right $layout-transition-speed, width $layout-transition-speed;
+}
+
+//
+// Mobile layout
+//
+
+@include media-breakpoint-down(md) {
+  .usd-header.navbar {
+    position: fixed !important;
+    z-index: $zindex-sticky;
+    width: 100%;
+    //text-align: center;
+    background-color: $navbar-brand-bg;
+    @include borders($navbar-brand-border);
+
+    /*.navbar-toggler {
+      @if (lightness( $navbar-brand-bg ) > 40) {
+        color: $navbar-color;
+      } @else {
+        color: #fff;
+      }
+    }*/
+
+    /*.navbar-brand {
+      position: absolute;
+      left: 50%;
+      margin-left: - ($navbar-brand-width / 2);
+    }*/
+  }
+
+  .usd-body {
+    margin-top: $navbar-height;
+
+    .card-block{
+      padding: 15px;
+    }
+
+    .usd-main {
+
+      .usd-content-area-standard .card{
+        margin-right: -15px;
+        margin-left: -15px;
+        border-left: none;
+        border-right: none;
+      }
+
+      .card-group .card{
+        margin:0;
+      }
+    }
+  }
+
+  .breadcrumb-fixed {
+    .main:nth-child(2) .usd-breadcrumb {
+      right: auto;
+      left: auto;
+      width: 100%;
+    }
+  }
+
+  .usd-sidebar,
+  .sidebar-fixed .usd-sidebar {
+    position: fixed;
+    z-index: $zindex-sticky - 1;
+    width: $mobile-sidebar-width;
+    // height: 100%;
+    margin-left: - $mobile-sidebar-width;
+
+    .sidebar-nav,
+    .nav {
+      width: $mobile-sidebar-width !important;
+      min-height: calc(100vh - #{$navbar-height});
+    }
+
+    .sidebar-minimizer {
+      display: none;
+    }
+  }
+
+  .usd-main, .usd-footer {
+    margin-left: 0 !important;
+  }
+
+  // .usd-aside-menu {
+  //   margin-right: - $aside-menu-width;
+  // }
+
+  .sidebar-hidden {
+    .usd-sidebar {
+      margin-left: - $mobile-sidebar-width;
+    }
+  }
+
+  .sidebar-mobile-show {
+    .usd-sidebar {
+      width: $mobile-sidebar-width;
+      margin-left: 0;
+    }
+
+    .usd-main {
+      margin-right: - $mobile-sidebar-width !important;
+      margin-left: $mobile-sidebar-width !important;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+
+  .usd-body .usd-main .usd-content-area-standard .card-group .card{
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}

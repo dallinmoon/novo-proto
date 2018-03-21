@@ -1,0 +1,295 @@
+// Pace
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  position: fixed;
+  top: 0;
+  right: 100%;
+  z-index: 2000;
+  width: 100%;
+  height: 2px;
+  background: $brand-primary;
+}
+
+// Spinnner
+
+.spinner {
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  padding: 15px 10px; 
+
+  > div{
+    background-color: $white;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  &.spinner-center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    display: flex;
+  }
+
+  &.spinner-sm{
+    width: 50px;
+
+    > div {
+      width: 5px;
+      height: 5px;
+    }
+  }
+
+  &.spinner-btn{
+    width: 40px;
+    padding: 0;
+    line-height: 17px;
+    text-align: right;
+    width: 35px;
+
+    > div {
+      width: 5px;
+      height: 5px;
+    }
+  }
+
+  &.spinner-md {
+    width: 100px;
+
+    > div{
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  &.spinner-lg {
+    width: 200px;
+
+    > div{
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+// Progress Bar
+
+.progress{
+  background-color: $gray-lighter;
+  .progress-bar{
+    font-family: $font-sans-serif;
+    font-weight: bold;
+    -webkit-transition: 0.25s ease-out; /* For Safari 3.1 to 6.0 */
+    transition: width 0.25s ease-out;
+  }
+}
+
+// Skeleton Demo
+.skeleton-breadcrumb{
+  .breadcrumb{
+    .breadcrumb-page-title:empty{
+      background-color: $gray-lighter;
+      width: 150px;
+      height: 30px;
+      border: none;
+    }
+    .breadcrumb-item:empty{
+      background-color: $gray-lighter;
+      width: 125px;
+      height: 20px;
+      margin-right: 1rem;
+      margin-top: 5px;
+
+      &:before{
+        display: none;
+      }
+    }
+  }
+}
+.skeleton-card{
+  .card{
+    border: none;
+
+    .card-header:empty{
+      display: block;
+      background-color: $gray-light;
+      width: 100%;
+      height: 50px;
+      border: none;
+    }
+
+    .card-block{
+      border: none;
+      display: block;
+      background-color: $white;
+      width: 100%;
+
+      p:empty{
+        display: block;
+        background-color: $gray-lighter;
+        width: 100%;
+        height: 20px;
+
+        &:last-of-type{
+          width: 25%;
+        }
+      }
+      button:empty{
+        display: block;
+        background-color: $gray-light;
+        width: 200px;
+        height: 50px;
+        border: none;
+        cursor: default;
+      }
+    }
+  }
+}
+.skeleton-list{
+  background-color: $white;
+  .avatar:empty{
+    height: 48px;
+    width: 48px;
+    background-color: $gray-lighter;
+    border-radius: 50%;
+    border: none;
+  }
+  h4:empty{
+    height: 20px;
+    width: 150px;
+    background-color: $gray-lighter;
+  }
+  p:empty{
+    display: block;
+    background-color: $gray-lighter;
+    width: 100%;
+    height: 20px;
+
+    &:last-of-type{
+      width: 25%;
+    }
+  }
+}
+
+.skeleton-table{
+
+  table{
+    background-color: $white;
+  }
+
+  tr{
+    height: 50px;
+    background-color: $gray-lighter;
+
+    &:first-child{
+      background-color: $gray-light;
+      height: 30px;
+    }
+  }
+
+  th{
+    border: 3px solid $white;
+  }
+
+  td{  
+    border: 3px solid $white;
+  }
+}
+
+.pulse-gray-lighter {
+  background-color: $gray-lighter;
+  animation-name: pulseGrayLighter;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulseGrayLighter {
+  0% {
+    background-color: $gray-lighter;
+  }
+  50% {
+    background-color: $gray-200;
+  }
+  100 {
+    background-color: $gray-lighter;
+  }
+}
+
+.pulse-gray-light {
+  background-color: $gray-light;
+  animation-name: pulseGrayLight;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulseGrayLight {
+  0% {
+    background-color: $gray-light;
+  }
+  50% {
+    background-color: $gray-400;
+  }
+  100 {
+    background-color: $gray-light;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .skeleton-breadcrumb .breadcrumb .breadcrumb-list .breadcrumb-item{
+    display: none;
+  }
+}
+
+.opacity-0{
+  opacity: 0;
+}
+.opacity-1{
+  opacity: 1;
+}
+
+#skeleton-demo{
+  transition: all 0.5s linear;
+}

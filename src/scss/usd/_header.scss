@@ -1,0 +1,14 @@
+.usd-header {
+  box-shadow: $box-shadow;
+
+  .nav-item{
+
+    i, svg{
+      margin-right: 5px;
+    }
+  }
+
+  .nav-link{
+    font-family: $font-sans-serif-alt;
+  }
+}

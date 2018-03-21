@@ -1,0 +1,24 @@
+.bg-primary,
+.bg-success,
+.bg-info,
+.bg-warning,
+.bg-danger,
+.bg-inverse,
+.bg-compliment {
+  color: #fff;
+}
+
+// Gray Backgrounds
+
+.bg-gray-light{
+  background-color: $gray-light;
+}
+.bg-gray-lighter{
+  background-color: $gray-lighter;
+}
+.bg-gray{
+  background-color: $gray;
+}
+.bg-gray-lightest{
+  background-color: $gray-lightest;
+}

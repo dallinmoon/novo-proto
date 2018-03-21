@@ -1,0 +1,99 @@
+#snackbar-container{
+  position:fixed;
+  right:$spacing-base;
+  bottom:0;
+  z-index:99999;
+
+  .snackbar{
+    overflow:hidden;
+    clear:both;
+    min-width:288px;
+    max-width:568px;
+    cursor:pointer;
+    display:none;
+    background-color: $transparent-dark-80;
+    color: $white;
+    padding: $spacing-base;
+    margin-bottom: $spacing-base;
+
+    &.snackbar-opened{
+      height:auto;
+      display:block;
+    }
+  }
+
+  [class="snackbar snackbar-opened"]~.snackbar.toast{
+    margin-top:20px;
+  }
+
+  [class="snackbar snackbar-opened"]{
+    border-radius:0;
+  }
+}
+
+@media (max-width:767px){
+  #snackbar-container{
+    left:0!important;
+    right:0;
+    width:100%;
+
+    .snackbar{
+      min-width:100%;
+      margin-bottom:0;
+    }
+  }
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+.snackbar.snackbar-opened {
+  visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: snackbarIn 0.5s;
+  animation: snackbarIn 0.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes snackbarIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes snackbarIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@-webkit-keyframes snackbarOut {
+  from {bottom: $spacing-base; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes snackbarOut {
+  from {bottom: $spacing-base; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@include media-breakpoint-down(md) {
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes snackbarIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+
+  @keyframes snackbarIn {
+    from {opacity: 0;}
+    to {margin-bottom: 0; opacity: 1;}
+  }
+
+  @-webkit-keyframes snackbarOut {
+    from {bottom: 0; opacity: 1;} 
+    to {bottom: -20px; opacity: 0;}
+  }
+
+  @keyframes snackbarOut {
+    from {bottom: 0; opacity: 1;}
+    to {bottom: -20px; opacity: 0;}
+  }
+}

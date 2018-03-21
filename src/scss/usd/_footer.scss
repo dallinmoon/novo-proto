@@ -1,0 +1,9 @@
+.usd-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: $footer-color;
+  background: $footer-bg;
+  @include borders($footer-borders);
+  box-shadow: $box-shadow;
+}
