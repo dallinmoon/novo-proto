@@ -1,230 +1,176 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { GSheetService } from '../../services/gsheet.service';
+import { WeatherService } from '../../services/weather.service';
+import { Chart } from 'chart.js';
+
+declare var Plotly: any;
+
+interface DataResponse {
+  rows: any;
+  site: string;
+  address: string;
+  usage1: string;
+}
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
-  // constructor( ) { }
+  @ViewChild('chart') el: ElementRef;
+  //modalRef: BsModalRef;
 
-  public brandPrimary = '#008FE0';
-  public brandSuccess = '#4dbd74';
-  public brandInfo = '#00a3e4';
-  public brandWarning = '#f8cb00';
-  public brandDanger = '#f86c6b';
+  weatherData: any;
+  weatherDataLastYear: any;
+  myData: any;
+  gs: any;
+  gsSiteInfo: any;
+  gsMeters: any;
+  gsCalc: any;
+  chart = [];
 
-  // dropdown buttons
-  public status: { isopen } = { isopen: false };
-  public toggleDropdown($event: MouseEvent): void {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.status.isopen = !this.status.isopen;
+  constructor(private router: Router, private http: HttpClient, private _gsheet: GSheetService, private _weather: WeatherService) {
   }
 
-  // convert Hex to RGBA
-  public convertHex(hex: string, opacity: number) {
-    hex = hex.replace('#', '');
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-
-    const rgba = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity / 100 + ')';
-    return rgba;
-  }
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-  // mainChart1
-
-  public random(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
-  public mainChart1Elements = 12;
-  public mainChart1Data1: Array<number> = [];
-  public mainChart1Data3: Array<number> = [];
-
-  public mainChart1Data: Array<any> = [
-    {
-      data: this.mainChart1Data1,
-      label: 'Current'
-    },
-    {
-      data: this.mainChart1Data3,
-      label: 'Target'
-    }
-  ];
-  /* tslint:disable:max-line-length */
-  public mainChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  /* tslint:enable:max-line-length */
-  public mainChart1Options: any = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          drawOnChartArea: false,
-        },
-        ticks: {
-          callback: function(value: any) {
-            return value.charAt(0);
-          }
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 5,
-          stepSize: Math.ceil(250 / 5),
-          max: 250
-        }
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      }
-    },
-    legend: {
-      display: true
-    }
-  };
-  public mainChart1Colours: Array<any> = [
-    { // brandInfo
-      backgroundColor: this.convertHex(this.brandInfo, 10),
-      borderColor: this.brandInfo,
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandDanger
-      backgroundColor: 'transparent',
-      borderColor: this.brandDanger,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 1,
-      borderDash: [8, 5]
-    }
-  ];
-  public mainChart1Legend = false;
-  public mainChart1Type = 'bar';
-
-  // mainChart2
-
-  public mainChart2Elements = 12;
-  public mainChart2Data1: Array<number> = [];
-  public mainChart2Data3: Array<number> = [];
-
-  public mainChart2Data: Array<any> = [
-    {
-      data: this.mainChart2Data1,
-      label: 'Current'
-    },
-    {
-      data: this.mainChart2Data3,
-      label: 'Target'
-    }
-  ];
-  /* tslint:disable:max-line-length */
-  public mainChart2Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  /* tslint:enable:max-line-length */
-  public mainChart2Options: any = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          drawOnChartArea: false,
-        },
-        ticks: {
-          callback: function(value: any) {
-            return value.charAt(0);
-          }
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 5,
-          stepSize: Math.ceil(250 / 5),
-          max: 250
-        }
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      }
-    },
-    legend: {
-      display: true
-    }
-  };
-  public mainChart2Colours: Array<any> = [
-    { // brandInfo
-      backgroundColor: this.convertHex(this.brandInfo, 10),
-      borderColor: this.brandInfo,
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandDanger
-      backgroundColor: 'transparent',
-      borderColor: this.brandDanger,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 1,
-      borderDash: [8, 5]
-    }
-  ];
-  public mainChart2Legend = false;
-  public mainChart2Type = 'line';
-
-  public barChartData:Array<any> = [
-		{data: [40, 30, 25, 25, 23, 15, 12, 11, 9, 9, 8.85, 8], label: 'Building A'}
-	];
-	public barChartLabels:Array<any> = ['Boatwright', 'Booker Hall', 'Burnet Hall', 'Cannon Memorial Chapel', 'Dennis Hall', 'Freeman Hall', 'Lora Robins Court', 'North Court', 'School of Law', 'Steam Plant', 'Whitehurst', 'Vineyards'];
-	public barChartOptions:any = {
-		responsive: true
-	};
-	public barChartColors:Array<any> = [
-		{ // building
-			backgroundColor: 'rgba(0,143,224,0.5)',
-			borderColor: 'rgba(0,143,224,1)',
-			pointBackgroundColor: 'rgba(0,143,224,1)',
-			pointBorderColor: 'rgba(255,255,255,1)',
-			pointHoverBackgroundColor: 'rgba(255,255,255,1)',
-			pointHoverBorderColor: 'rgba(0,143,224,0.5)'
-		}
-	];
-	public barChartLegend:boolean = true;
-	public barChartType:string = 'horizontalBar';
-
+  dataReady: boolean = false;
 
   ngOnInit(): void {
-    // generate random values for mainChart
-    for (let i = 0; i <= this.mainChart1Elements; i++) {
-      this.mainChart1Data1.push(this.random(50, 200));
-      this.mainChart1Data3.push(125);
-    }
 
-    for (let i = 0; i <= this.mainChart1Elements; i++) {
-      this.mainChart2Data1.push(this.random(50, 200));
-      this.mainChart2Data3.push(125);
-    }
+    this._gsheet.gSheetSiteInfo().subscribe(res => {
+      this.gsSiteInfo = res;
+    });
+
+    this._weather.dailyForecast()
+      .subscribe(res => {
+        this.weatherData = res;
+
+        let date1 = new Date(res.daily.data[0].time * 1000);
+        let date2 = new Date(res.daily.data[1].time * 1000);
+        let date3 = new Date(res.daily.data[2].time * 1000);
+        let date4 = new Date(res.daily.data[3].time * 1000);
+        let date5 = new Date(res.daily.data[4].time * 1000);
+        let date6 = new Date(res.daily.data[5].time * 1000);
+        let date7 = new Date(res.daily.data[6].time * 1000);
+
+        let date1day = date1.getDate();
+        let date2day = date2.getDate();
+        let date3day = date3.getDate();
+        let date4day = date4.getDate();
+        let date5day = date4.getDate();
+        let date6day = date5.getDate();
+        let date7day = date6.getDate();
+
+        function formatDate(date) {
+
+          var dayNames = [
+            "Sun", "Mon", "Tue",
+            "Wed", "Thu", "Fri", "Sat"
+          ];
+
+          var dayIndex = date.getDay();
+
+          return dayNames[dayIndex];
+        }
+
+        res.day1 = formatDate(date1);
+        res.day2 = formatDate(date2);
+        res.day3 = formatDate(date3);
+        res.day4 = formatDate(date4);
+        res.day5 = formatDate(date5);
+        res.day6 = formatDate(date6);
+        res.day7 = formatDate(date7);
+
+        let day1SunriseTime = new Date(res.daily.data[0].sunriseTime * 1000);
+        let day1SunsetTime = new Date(res.daily.data[0].sunsetTime * 1000);
+
+        function formatTime(date) {
+
+          var timeHours = date.getHours();
+          var timeMinutes = date.getMinutes();
+
+          return timeHours + ":" + timeMinutes;
+        }
+
+        res.day1SunriseTime = formatTime(day1SunriseTime);
+        res.day1SunsetTime = formatTime(day1SunsetTime);
+
+        let day1Icon = res.daily.data[0].icon;
+        let day2Icon = res.daily.data[1].icon;
+        let day3Icon = res.daily.data[2].icon;
+        let day4Icon = res.daily.data[3].icon;
+        let day5Icon = res.daily.data[4].icon;
+        let day6Icon = res.daily.data[5].icon;
+        let day7Icon = res.daily.data[6].icon;
+
+        function wiIcon(icon){
+          if (icon === "partly-cloudy-day"){
+            return "wi-day-cloudy";
+          } else if (icon === "snow") {
+            return "wi-snow";
+          } else if (icon === "partly-cloudy-night") {
+            return "wi-night-alt-cloudy";
+          } else if (icon === "rain") {
+            return "wi-rain";
+          } else if (icon === "clear-day") {
+            return "wi-day-sunny";
+          } else if (icon === "clear-night") {
+            return "wi-night-clear";
+          } else if (icon === "sleet") {
+            return "wi-sleet";
+          } else if (icon === "wind") {
+            return "wi-strong-wind";
+          } else if (icon === "fog") {
+            return "wi-fog";
+          } else if (icon === "cloudy") {
+            return "wi-cloudy";
+          } else {
+            return "wi-day-sunny";
+          }
+        }
+
+        res.day1Icon = wiIcon(day1Icon);
+        res.day2Icon = wiIcon(day2Icon);
+        res.day3Icon = wiIcon(day3Icon);
+        res.day4Icon = wiIcon(day4Icon);
+        res.day5Icon = wiIcon(day5Icon);
+        res.day6Icon = wiIcon(day6Icon);
+        res.day7Icon = wiIcon(day7Icon);
+
+        let day1WindDirection = res.daily.data[0].windBearing;
+
+        function windDirection(windBearing){
+          if (windBearing > 337 || windBearing < 24){
+            return "N";
+          } else if (windBearing > 23 && windBearing < 69) {
+            return "NE";
+          } else if (windBearing > 68 && windBearing < 114) {
+            return "E";
+          } else if (windBearing > 113 && windBearing < 159) {
+            return "SE";
+          } else if (windBearing > 158 && windBearing < 204) {
+            return "S";
+          } else if (windBearing > 203 && windBearing < 248) {
+            return "SW";
+          } else if (windBearing > 247 && windBearing < 295) {
+            return "W";
+          } else if (windBearing > 294 && windBearing < 338) {
+            return "NW";
+          }
+        }
+
+        res.day1WindDirection = windDirection(day1WindDirection);
+
+      })
+
+    this._weather.weatherDataLastYear()
+      .subscribe(res => {
+        this.weatherDataLastYear = res;
+
+        const highLastYear = res.daily.data[0].temperatureHigh;
+        const lowLastYear = res.daily.data[0].temperatureLow;
+
+    });
   }
 }

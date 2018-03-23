@@ -1,123 +1,11 @@
 <div class="usd-content-area usd-content-area-standard animated fadeIn">
-  <div class="row" *ngIf="dataReady">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-block">
-          <div class="row">
-            <div class="col-lg-4">
-              <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?center={{ gsSiteInfo?.rows[0].maplat }},{{ gsSiteInfo?.rows[0].maplong }}&zoom={{ gsSiteInfo?.rows[0].mapzoom }}&size=800x400&maptype=roadmap&markers=color:blue&key=AIzaSyCRiDbCDdIt-_o1_L2gHWw9268177i6a4Q">
-            </div>
-            <div class="col-lg-4">
-              <div class="row">
-                <div class="col-12">
-                  <h4 class="mb-1 mt-3 mt-lg-0">{{ gsSiteInfo?.rows[0].site }}</h4>
-                  <div class="text-secondary small">
-                    <p class="mb-0">{{ gsSiteInfo?.rows[0].address }}</p>
-                    <p>{{ gsSiteInfo?.rows[0].city }} {{ gsSiteInfo?.rows[0].state }} {{ gsSiteInfo?.rows[0].zip }}</p>
-                  </div>
-                  <p class="mb-0"><strong>Area:</strong> {{ gsSiteInfo?.rows[0].area }} sq. ft.</p>
-                  <p class="mb-0"><strong>Buildings:</strong> {{ gsSiteInfo?.rows[0].buildings }}</p>
-                  <p class="mb-0"><strong>Occupants:</strong> {{ gsSiteInfo?.rows[0].occupants }}</p>
-                  <p class="mb-0"><strong>Type:</strong> {{ gsSiteInfo?.rows[0].type }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <h4>Meters</h4>
-              <div class="list list-sm mb-3">
-                <div class="item bg-gray-lightest py-1">
-                  <div class="avatar avatar-xs bg-danger border-white">
-                    <i class="fas fa-bolt text-light"></i>
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-input-wrapper">
-                      <div class="item-label">
-                        <h4 class="mb-0">Power</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <h1 class="item-end font-bold">12</h1>
-                </div>
-              </div>
-              <div class="list list-sm mb-3">
-                <div class="item bg-gray-lightest py-1">
-                  <div class="avatar avatar-xs bg-info border-white">
-                    <i class="fas fa-tint text-light"></i>
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-input-wrapper">
-                      <div class="item-label">
-                        <h4 class="mb-0">Water</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <h1 class="item-end font-bold">12</h1>
-                </div>
-              </div>
-              <div class="list list-sm mb-0">
-                <div class="item bg-gray-lightest py-1">
-                  <div class="avatar avatar-xs bg-success border-white">
-                    <i class="fas fa-fire text-light"></i>
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-input-wrapper">
-                      <div class="item-label">
-                        <h4 class="mb-0">Gas</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <h1 class="item-end font-bold">05</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="card">
-        <div class="card-block">
-          <h4 class="card-title mb-0">Usage History (kWh)</h4>
-          <p class="text-secondary">{{ gsMeters?.rows[4].meterlabel }}</p>
-          <div *ngIf="chart">
-            <canvas id="chartUsageHistory" height="230">{{ chart }}</canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-block">
-          <h4 class="card-title font-bold mb-0">Site Comparison</h4>
-          <p class="text-muted">Last 24 Hours</p>
-          <p class="mb-0">Best Building</p>
-          <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0.38 kWh</div>
-          </div>
-          <p class="mb-0 mt-2">Goal</p>
-          <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">0.42 kWh</div>
-          </div>
-          <p class="mb-0 mt-2">Median Building</p>
-          <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">0.73 kWh</div>
-          </div>
-          <p class="mb-0 mt-2">Highest Building</p>
-          <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">1.93 kWh</div>
-          </div>              
-        </div>
-      </div>
-    </div>
-  </div>
+  <h2 class="font-bold text-uppercase pt-2 pb-3 text-muted"><i class="fa fa-usd-circle"></i> Utility Bill</h2>
   <div class="row">
     <div class="col-lg-4">
       <div [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12, 'card-accent-success': gsCalc?.rows[0].usagehist0 < gsCalc?.rows[0].usagehist12}" class="card">
         <div class="card-block">
           <h5 class="card-title">Monthly Total</h5>
-          <h1 class="font-bold">{{ gsCalc?.rows[0].usagehist0 }} <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <h1 class="font-bold">$205,000</h1>
           <div *ngIf="gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12; then overYOY; else underYOY"></div>
           <ng-template #overYOY>
             <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].yoydiff }} over last year</p>
@@ -132,13 +20,13 @@
       <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].highusageoveravg > 0.25, 'card-accent-success': gsCalc?.rows[0].highusageoveravg < 0.25}">
         <div class="card-block">
           <h5 class="card-title">High (Past Year)</h5>
-          <h1 class="font-bold">{{ gsCalc?.rows[0].highusage }} <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <h1 class="font-bold">$280,000</h1>
           <div *ngIf="gsCalc?.rows[0].highusageoveravg > 0.25; then overTarget; else underTarget"></div>
           <ng-template #overTarget>
-            <p class="text-danger mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
+            <p class="text-danger mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average spend</p>
           </ng-template>
           <ng-template #underTarget>
-            <p class="text-success mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
+            <p class="text-success mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average spend</p>
           </ng-template>
         </div>
       </div>
@@ -147,7 +35,7 @@
       <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget, 'card-accent-success': gsCalc?.rows[0].usagehistavg < gsCalc?.rows[0].usagehistavgtarget }">
         <div class="card-block">
           <h5 class="card-title">Average (Past Year)</h5>
-          <h1 class="font-bold">{{ gsCalc?.rows[0].usagehistavg }} <span class="text-secondary font-lg font-sans-serif">kWh</span></h1>
+          <h1 class="font-bold">$225,000</h1>
           <div *ngIf="gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget; then overAvgTarget; else underAvgTarget"></div>
           <ng-template #overAvgTarget>
             <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} over target</p>
@@ -419,79 +307,6 @@
           <p class="text-success text-center mb-3"><i class="fas fa-caret-down"></i> 8% under last year</p>
           <div *ngIf="chart">
             <canvas id="consumptionProjection" height="150">{{ chart }}</canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="card card-novo-equipment">
-        <div class="card-block">
-          <h4 class="card-title"><i class="fas fa-tachometer"></i> Demand</h4>
-          <div class="text-center d-flex justify-content-center mt-4">
-            <div class="rounded-circle p-3 novo-circle d-flex align-items-center justify-content-center">
-              <p class="novo-circle-number mb-0 text-primary"><i class="fas fa-tachometer"></i></p>
-            </div>
-          </div>
-          <h1 class="text-center font-bold mt-4 mb-0">9000000</h1>
-          <p class="text-center text-secondary mb-3">kW Demand</p>
-          <div class="row">
-            <div class="col-12 text-center">
-              <div class="bg-gray-lightest border border-gray py-3 mt-2">
-                <h6 class="mb-3"><strong><i class="fal fa-tachometer"></i> Meter</strong></h6>
-                <p class="text-secondary mb-0 small">kWh</p>
-                <h6>9000000</h6>
-                <p class="text-secondary mb-0 small">kWh / ft<sup>2</sup></p>
-                <h6 class="mb-0">9000000</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <div class="card">
-        <div class="card-block">
-          <div class="row align-items-center">
-            <div class="col-md-3 mb-3 mb-lg-0">
-              <div class="text-center">
-                <div class="bg-gray-lightest border border-gray py-3">
-                  <p class="mb-3"><strong><i class="fal fa-asterisk"></i> AHUs</strong></p>
-                  <p class="text-secondary mb-0 small">Enabled</p>
-                  <h6>4 of 18</h6>
-                  <p class="text-secondary mb-0 small">% Running</p>
-                  <h6>100%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div *ngIf="chart">
-                <canvas height="175" id="timeSeries1"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-block">
-          <div class="row align-items-center">
-            <div class="col-md-3 mb-3 mb-lg-0">
-              <div class="text-center">
-                <div class="bg-gray-lightest border border-gray py-3">
-                  <p class="mb-3"><strong><i class="fal fa-lightbulb"></i> Lighting</strong></p>
-                  <p class="text-secondary mb-0 small">Enabled</p>
-                  <h6>200 of 8000</h6>
-                  <p class="text-secondary mb-0 small">% Running</p>
-                  <h6>100%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div *ngIf="chart">
-                <canvas height="175" id="timeSeries2"></canvas>
-              </div>
-            </div>
           </div>
         </div>
       </div>

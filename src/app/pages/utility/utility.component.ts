@@ -42,61 +42,6 @@ export class UtilityComponent implements OnInit {
     this._gsheet.gSheetMetersCalc().subscribe(res => {
       this.gsCalc = res;
 
-      this.chart = new Chart('chartUsageHistory', {
-        type: 'bar',
-        data: {
-          labels: ["Feb18", "Jan18", "Dec17", "Nov17", "Oct17", "Sep17", "Aug17", "Jul17", "Jun17", "May17", "Apr17", "Mar17", "Feb17"],
-          datasets: [
-            {
-              type: 'bar',
-              data: [res.rows[0].usagehist0, res.rows[0].usagehist1, res.rows[0].usagehist2, res.rows[0].usagehist3, res.rows[0].usagehist4, res.rows[0].usagehist5, res.rows[0].usagehist6, res.rows[0].usagehist7, res.rows[0].usagehist8, res.rows[0].usagehist9, res.rows[0].usagehist10, res.rows[0].usagehist11, res.rows[0].usagehist12],
-              borderColor: '#008FE0',
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,143,224,0.5)',
-              label: 'Usage History'
-            },
-            {
-              data: [res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg, res.rows[0].usagehistavg],
-              type: 'line',
-              borderColor: '#e05100',
-              pointBorderWidth: 0,
-              pointBorderColor: 'rgba(0,0,0,0)',
-              pointBackgroundColor: 'rgba(0,0,0,0)',
-              borderDash: [5, 5],
-              fill: false,
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,0,0,0)',
-              label: 'Usage Average'
-            }
-          ]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: true,
-            text: 'Usage',
-            position: 'top'
-          },
-          title: {
-            display: false,
-            text: 'Usage History'
-          },
-          scales: {
-            xAxes: [
-              {
-                display: true
-              }
-            ],
-            yAxes: [
-              {
-                display: true
-              }
-            ]
-          }
-        }
-      })
-
       this.chart = new Chart('chartPeak', {
         type: 'doughnut',
         data: {
@@ -382,7 +327,7 @@ export class UtilityComponent implements OnInit {
         }
       })
 
-      var timeFormat = 'MM/DD/YYYY HH:mm';
+      /*var timeFormat = 'MM/DD/YYYY HH:mm';
 
       this.chart = new Chart('timeSeries1', {
         type: 'line',
@@ -480,7 +425,7 @@ export class UtilityComponent implements OnInit {
             }]
           },
         }
-      })
+      })*/
 
     });
 
@@ -521,140 +466,7 @@ export class UtilityComponent implements OnInit {
         let miscLate = res.rows[0].misclate;
         let miscOther = res.rows[0].miscother;
 
-        console.log(miscTax);
-
-        /*this.chart = new Chart('chartUsageHistory', {
-          type: 'bar',
-          data: {
-            labels: [usage1month, usage2month, usage3month, usage4month, usage5month, usage6month, usage7month, usage8month, usage9month, usage10month, usage11month, usage12month],
-            datasets: [
-              {
-                type: 'bar',
-                data: [usage1, usage2, usage3, usage4, usage5, usage6, usage7, usage8, usage9, usage10, usage11, usage12],
-                borderColor: '#008FE0',
-                borderWidth: 1,
-                backgroundColor: 'rgba(0,143,224,0.5)',
-                label: 'Usage History'
-              },
-              {
-                data: [usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg],
-                type: 'line',
-                borderColor: '#e05100',
-                pointBorderWidth: 0,
-                pointBorderColor: 'rgba(0,0,0,0)',
-                pointBackgroundColor: 'rgba(0,0,0,0)',
-                borderDash: [5, 5],
-                fill: false,
-                borderWidth: 1,
-                backgroundColor: 'rgba(0,0,0,0)',
-                label: 'Usage Average'
-              }
-            ]
-          },
-          options: {
-            maintainAspectRatio: false,
-            responsive: true,
-            legend: {
-              display: true,
-              text: 'Usage',
-              position: 'top'
-            },
-            title: {
-              display: false,
-              text: 'Usage History'
-            },
-            scales: {
-              xAxes: [
-                {
-                  display: true
-                }
-              ],
-              yAxes: [
-                {
-                  display: true
-                }
-              ]
-            }
-          }
-        })*/
-
-        /*this.chart = new Chart('chartPeak', {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              data: [
-                onPkUsageCurrent,
-                offPkUsageCurrent
-              ],
-              backgroundColor: [
-                '#008FE0',
-                '#CCCCCC'
-              ],
-              label: 'Dataset 1'
-            }],
-            labels: [
-              'On Peak',
-              'Off Peak'
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: false,
-              text: 'Chart.js Doughnut Chart'
-            },
-            animation: {
-              animateScale: true,
-              animateRotate: true
-            }
-          }
-        })*/
-
-        /*this.chart = new Chart('chartMisc', {
-          type: 'pie',
-          data: {
-            datasets: [{
-              data: [
-                miscTax,
-                miscLate,
-                miscOther
-              ],
-              backgroundColor: [
-                '#008FE0',
-                '#e05100',
-                '#e0c100'
-              ],
-              label: 'Dataset 1'
-            }],
-            labels: [
-              'Tax',
-              'Late',
-              'Other'
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: false,
-              text: 'Chart.js Doughnut Chart'
-            },
-            animation: {
-              animateScale: true,
-              animateRotate: true
-            }
-          }
-        })*/
       })
-
-    //this.lineChart();
 
   }
 

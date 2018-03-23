@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes,
      RouterModule } from '@angular/router';
 
-import { UtilityComponent } from './utility.component';
+import { WaterComponent } from './water.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UtilityComponent,
+    component: WaterComponent,
     data: {
-      title: 'Utility Bill'
+      title: 'Water'
     }
   }
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UtilityRoutingModule {}
+export class WaterRoutingModule {}

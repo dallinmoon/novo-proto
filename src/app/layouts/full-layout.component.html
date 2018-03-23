@@ -27,19 +27,16 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/dashboard']"><i class="fal fa-tachometer"></i> Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/utility']"><i class="fal fa-file-check"></i> Utility Bill</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/utility']"><i class="fal fa-dollar-sign"></i> Utility Bill</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/power']"><i class="fal fa-bolt"></i> Power</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/hvac']"><i class="fal fa-asterisk"></i> HVAC</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/water']"><i class="fal fa-tint"></i> Water</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/gas']"><i class="fal fa-fire"></i> Gas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/app/lighting']"><i class="fal fa-lightbulb"></i> Lighting</a>
         </li>
       </ul>
     </nav>
@@ -51,29 +48,30 @@
     <!-- Breadcrumb -->
     <div class="usd-breadcrumb breadcrumb">
       <ul class="breadcrumb-list">
+        <li class="breadcrumb-item"><a [routerLink]="['/app/dashboard']">University of Richmond</a> <i class="fal fa-angle-right"></i>&nbsp;</li>
         <app-breadcrumbs></app-breadcrumbs>
       </ul>
       <ul class="nav ml-auto breadcrumb-menu-list">
         <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
           <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
-            <i class="fal fa-tachometer"></i> <span class="d-lg-down-none">All Meters</span>
+            <i class="fal fa-tachometer"></i> <span class="d-lg-down-none">All Buildings</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right animated fadeTop" *dropdownMenu aria-labelledby="simple-dropdown">
     
-            <div class="dropdown-header text-center"><i class="fal fa-calendar"></i> All Meters</div>
-            <a class="dropdown-item" href="#">Main Meter</a>
-            <a class="dropdown-item" href="#">Stadium</a>
-            <a class="dropdown-item" href="#">Chiller</a>
-            <a class="dropdown-item" href="#">Special Program</a>
+            <div class="dropdown-header text-center"><i class="fal fa-building"></i> Buildings</div>
+            <a class="dropdown-item" href="#">Building 1</a>
+            <a class="dropdown-item" href="#">Building 2</a>
+            <a class="dropdown-item" href="#">Building 3</a>
+            <a class="dropdown-item" href="#">Building 4</a>
           </div>
         </li>
         <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
           <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
-            <i class="fal fa-calendar"></i> <span class="d-lg-down-none">Most Recent Bill</span>
+            <i class="fal fa-calendar"></i> <span class="d-lg-down-none">This Month</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right animated fadeTop" *dropdownMenu aria-labelledby="simple-dropdown">
     
-            <div class="dropdown-header text-center"><i class="fal fa-calendar"></i> Billing Cycle</div>
+            <div class="dropdown-header text-center"><i class="fal fa-calendar"></i> Date</div>
             <a class="dropdown-item" href="#">Last Month</a>
             <a class="dropdown-item" href="#">2 Months Ago</a>
             <a class="dropdown-item" href="#">3 Months Ago</a>

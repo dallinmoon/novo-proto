@@ -22,3 +22,22 @@
 .bg-gray-lightest{
   background-color: $gray-lightest;
 }
+
+.bg-danger-lightest{
+  background-color: lighten($brand-danger, 40%);
+}
+.bg-danger-lighter{
+  background-color: lighten($brand-danger, 33%);
+}
+.bg-danger-light{
+  background-color: lighten($brand-danger, 10%);
+}
+.bg-danger-dark{
+  background-color: darken($brand-danger, 10%);
+}
+.bg-danger-darker{
+  background-color: darken($brand-danger, 33%);
+}
+.bg-danger-darkest{
+  background-color: darken($brand-danger, 50%);
+}

@@ -1,11 +1,11 @@
 <div class="usd-content-area usd-content-area-standard animated fadeIn">
-  <h2 class="font-bold text-uppercase pb-3 pt-2 text-muted"><i class="fa fa-fire"></i> Gas</h2>
+  <h2 class="font-bold text-uppercase pb-3 pt-2 text-muted"><i class="fa fa-tint"></i> Water</h2>
   <div class="row">
     <div class="col-lg-4">
       <div [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12, 'card-accent-success': gsCalc?.rows[0].usagehist0 < gsCalc?.rows[0].usagehist12}" class="card">
         <div class="card-block">
           <h5 class="card-title">Monthly Total</h5>
-          <h1 class="font-bold">125,000 <span class="text-secondary font-lg font-sans-serif">ft<sup>3</sup></span></h1>
+          <h1 class="font-bold">50,000 <span class="text-secondary font-lg font-sans-serif">gal</span></h1>
           <div *ngIf="gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12; then overYOY; else underYOY"></div>
           <ng-template #overYOY>
             <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].yoydiff }} over last year</p>
@@ -20,7 +20,7 @@
       <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].highusageoveravg > 0.25, 'card-accent-success': gsCalc?.rows[0].highusageoveravg < 0.25}">
         <div class="card-block">
           <h5 class="card-title">High (Past Year)</h5>
-          <h1 class="font-bold">175,000 <span class="text-secondary font-lg font-sans-serif">ft<sup>3</sup></span></h1>
+          <h1 class="font-bold">75,000 <span class="text-secondary font-lg font-sans-serif">gal</span></h1>
           <div *ngIf="gsCalc?.rows[0].highusageoveravg > 0.25; then overTarget; else underTarget"></div>
           <ng-template #overTarget>
             <p class="text-danger mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
@@ -35,7 +35,7 @@
       <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget, 'card-accent-success': gsCalc?.rows[0].usagehistavg < gsCalc?.rows[0].usagehistavgtarget }">
         <div class="card-block">
           <h5 class="card-title">Average (Past Year)</h5>
-          <h1 class="font-bold">150,000 <span class="text-secondary font-lg font-sans-serif">ft<sup>3</sup></span></h1>
+          <h1 class="font-bold">65,000 <span class="text-secondary font-lg font-sans-serif">gal</span></h1>
           <div *ngIf="gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget; then overAvgTarget; else underAvgTarget"></div>
           <ng-template #overAvgTarget>
             <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} over target</p>
@@ -52,7 +52,7 @@
       <div class="card-deck">
         <div class="card">
           <div class="card-block">
-            <h4 class="card-title mb-0">Usage History (ft<sup>3</sup>)</h4>
+            <h4 class="card-title mb-0">Usage History (gallons)</h4>
             <p class="text-secondary">{{ gsMeters?.rows[4].meterlabel }}</p>
             <div *ngIf="chart">
               <canvas id="chartUsageHistory" height="360">{{ chart }}</canvas>
@@ -69,25 +69,25 @@
           <h4 class="card-title">Site Comparison</h4>
           <p class="mb-0">Best Building</p>
           <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">75k ft<sup>3</sup></div>
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25k gal</div>
           </div>
           <p class="mb-0 mt-2">Goal</p>
           <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">80k ft<sup>3</sup></div>
+            <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">30k gal</div>
           </div>
           <p class="mb-0 mt-2">Median Building</p>
           <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">85k ft<sup>3</sup></div>
+            <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">29k gal</div>
           </div>
           <p class="mb-0 mt-2">Highest Building</p>
           <div class="progress" style="height: 25px;">
-            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">150k ft<sup>3</sup></div>
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">55k gal</div>
           </div>              
         </div>
       </div>
       <div class="card">
         <div class="card-block power-intensity-grid">
-          <h4>Gas Usage</h4>
+          <h4>Water Peaks</h4>
           <div class="row no-gutters text-muted small">
             <div class="col-2">
               8AM
@@ -374,7 +374,7 @@
     <div class="col-lg-8">
       <div class="card">
         <div class="card-block">
-          <h4 class="card-title">Gas Usage / ft<sup>3</sup></h4>
+          <h4 class="card-title">Water Usage / Gallons</h4>
           <div margin-bottom style="display: block;">
             <canvas baseChart width="300" height="300"
               [datasets]="barChartData"

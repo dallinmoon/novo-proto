@@ -24,6 +24,8 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
 // Service
 import { GSheetService } from './services/gsheet.service';
+import { WeatherService } from './services/weather.service';
+import { LocalForecastComponent } from './pages/local-forecast/local-forecast.component';
 
 
 @NgModule({
@@ -44,13 +46,14 @@ import { GSheetService } from './services/gsheet.service';
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
-    AsideToggleDirective,
+    AsideToggleDirective
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
   },
-  GSheetService
+  GSheetService,
+  WeatherService
   ],
   bootstrap: [ AppComponent ]
 })

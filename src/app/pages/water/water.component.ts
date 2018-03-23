@@ -14,9 +14,9 @@ interface DataResponse {
 }
 
 @Component({
-  templateUrl: 'power.component.html'
+  templateUrl: 'water.component.html'
 })
-export class PowerComponent implements OnInit {
+export class WaterComponent implements OnInit {
 
   @ViewChild('chart') el: ElementRef;
   //modalRef: BsModalRef;

@@ -31,6 +31,125 @@ export class GasComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private _gsheet: GSheetService) {
   }
 
+  public brandPrimary = '#008FE0';
+  public brandSuccess = '#4dbd74';
+  public brandInfo = '#00a3e4';
+  public brandWarning = '#f8cb00';
+  public brandDanger = '#f86c6b';
+
+  // convert Hex to RGBA
+  public convertHex(hex: string, opacity: number) {
+    hex = hex.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    const rgba = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity / 100 + ')';
+    return rgba;
+  }
+
+  // events
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+
+  // mainChart2
+  public mainChart2Elements = 12;
+  public mainChart2Data1: Array<number> = [];
+  public mainChart2Data3: Array<number> = [];
+
+  public mainChart2Data: Array<any> = [
+    {
+      data: this.mainChart2Data1,
+      label: 'Current'
+    },
+    {
+      data: this.mainChart2Data3,
+      label: 'Target'
+    }
+  ];
+  /* tslint:disable:max-line-length */
+  public mainChart2Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  /* tslint:enable:max-line-length */
+  public mainChart2Options: any = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          drawOnChartArea: false,
+        },
+        ticks: {
+          callback: function(value: any) {
+            return value.charAt(0);
+          }
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          maxTicksLimit: 5,
+          stepSize: Math.ceil(250 / 5),
+          max: 250
+        }
+      }]
+    },
+    elements: {
+      line: {
+        borderWidth: 2
+      },
+      point: {
+        radius: 0,
+        hitRadius: 10,
+        hoverRadius: 4,
+        hoverBorderWidth: 3,
+      }
+    },
+    legend: {
+      display: true
+    }
+  };
+  public mainChart2Colours: Array<any> = [
+    { // brandInfo
+      backgroundColor: this.convertHex(this.brandInfo, 10),
+      borderColor: this.brandInfo,
+      pointHoverBackgroundColor: '#fff'
+    },
+    { // brandDanger
+      backgroundColor: 'transparent',
+      borderColor: this.brandDanger,
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 1,
+      borderDash: [8, 5]
+    }
+  ];
+  public mainChart2Legend = false;
+  public mainChart2Type = 'line';
+
+  public barChartData:Array<any> = [
+		{data: [40, 30, 25, 25, 23, 15, 12, 11, 9, 9, 8.85, 8], label: 'Building A'}
+	];
+	public barChartLabels:Array<any> = ['Boatwright', 'Booker Hall', 'Burnet Hall', 'Cannon Memorial Chapel', 'Dennis Hall', 'Freeman Hall', 'Lora Robins Court', 'North Court', 'School of Law', 'Steam Plant', 'Whitehurst', 'Vineyards'];
+	public barChartOptions:any = {
+		responsive: true
+	};
+	public barChartColors:Array<any> = [
+		{ // building
+			backgroundColor: 'rgba(0,143,224,0.5)',
+			borderColor: 'rgba(0,143,224,1)',
+			pointBackgroundColor: 'rgba(0,143,224,1)',
+			pointBorderColor: 'rgba(255,255,255,1)',
+			pointHoverBackgroundColor: 'rgba(255,255,255,1)',
+			pointHoverBorderColor: 'rgba(0,143,224,0.5)'
+		}
+	];
+	public barChartLegend:boolean = true;
+	public barChartType:string = 'horizontalBar';
+
   dataReady: boolean = false;
 
   ngOnInit(): void {
@@ -97,391 +216,6 @@ export class GasComponent implements OnInit {
         }
       })
 
-      this.chart = new Chart('chartPeak', {
-        type: 'doughnut',
-        data: {
-          datasets: [{
-            data: [
-              res.rows[0].onpeakusage,
-              res.rows[0].offpeakusage
-            ],
-            backgroundColor: [
-              '#008FE0',
-              '#CCCCCC'
-            ],
-            label: 'Dataset 1'
-          }],
-          labels: [
-            'On Peak',
-            'Off Peak'
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: false,
-            text: 'Chart.js Doughnut Chart'
-          },
-          animation: {
-            animateScale: true,
-            animateRotate: true
-          }
-        }
-      })
-
-      this.chart = new Chart('chartMisc', {
-        type: 'pie',
-        data: {
-          datasets: [{
-            data: [
-              res.rows[0].tax,
-              res.rows[0].riders,
-              res.rows[0].fuel,
-              res.rows[0].distfacchg,
-              res.rows[0].other
-            ],
-            backgroundColor: [
-              '#008FE0',
-              '#e05100',
-              '#e0c100',
-              '#ff701f',
-              '#701fff'
-            ],
-            label: 'Dataset 1'
-          }],
-          labels: [
-            'Tax',
-            'Riders',
-            'Fuel',
-            'Dist Fac Chg',
-            'Other'
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: false,
-            text: 'Chart.js Doughnut Chart'
-          },
-          animation: {
-            animateScale: true,
-            animateRotate: true
-          }
-        }
-      })
-
-      this.chart = new Chart('projectedBudget', {
-        type: 'bar',
-        data: {
-          labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"],
-          datasets: [
-            {
-              type: 'bar',
-              data: [1500, -500, 1000, 500, 2473],
-              borderColor: '#008FE0',
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,143,224,0.5)',
-              label: 'Over/Under Daily Budget'
-            }
-          ]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: false,
-            text: 'Usage',
-            position: 'top'
-          },
-          title: {
-            display: false,
-            text: 'Usage History'
-          },
-          scales: {
-            xAxes: [
-              {
-                display: false,
-                gridLines: {
-                  display:false
-                }
-              }
-            ],
-            yAxes: [
-              {
-                display: true,
-                gridLines: {
-                  display:true,
-                  color: "rgba(255,255,255,0)",
-                  zeroLineColor: "rgb(225,225,225)"
-                }
-              }
-            ]
-          }
-        }
-      })
-
-      this.chart = new Chart('projectedUsage', {
-        type: 'bar',
-        data: {
-          labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27", "Day 28", "Day 29", "Day 30"],
-          datasets: [
-            {
-              type: 'bar',
-              data: [-2500, 500, -3000, -3685, 500 ],
-              borderColor: '#008FE0',
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,143,224,0.5)',
-              label: 'Over/Under Daily Budget'
-            }
-          ]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: false,
-            text: 'Usage',
-            position: 'top'
-          },
-          title: {
-            display: false,
-            text: 'Usage History'
-          },
-          scales: {
-            xAxes: [
-              {
-                display: false,
-                gridLines: {
-                  display:false
-                }
-              }
-            ],
-            yAxes: [
-              {
-                display: true,
-                gridLines: {
-                  display:true,
-                  color: "rgba(255,255,255,0)",
-                  zeroLineColor: "rgb(225,225,225)"
-                }
-              }
-            ]
-          }
-        }
-      })
-
-      this.chart = new Chart('budgetProjection', {
-        type: 'bar',
-        data: {
-          labels: ["Feb", "Mar", "Apr"],
-          datasets: [
-            {
-              type: 'bar',
-              data: [250000, 275000, 254000],
-              borderColor: '#AAAAAA',
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,0,0,0.2)',
-              label: '2017'
-            },
-            {
-              type: 'bar',
-              data: [275000, 300000, 280000],
-              borderColor: '#4dbd74',
-              borderWidth: 1,
-              backgroundColor: 'rgba(77,189,116,0.5)',
-              label: '2018'
-            }
-          ]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: true,
-            position: "top"
-          },
-          title: {
-            display: false,
-            text: 'Usage History'
-          },
-          scales: {
-            xAxes: [
-              {
-                display: true
-              }
-            ],
-            yAxes: [
-              {
-                display: true,
-                ticks: {
-                  min: 0
-                }
-              }
-            ]
-          }
-        }
-      })
-
-      this.chart = new Chart('consumptionProjection', {
-        type: 'bar',
-        data: {
-          labels: ["Feb", "Mar", "Apr"],
-          datasets: [
-            {
-              type: 'bar',
-              data: [2750000, 3000000, 2800000],
-              borderColor: '#AAAAAA',
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,0,0,0.2)',
-              label: '2017'
-            },
-            {
-              type: 'bar',
-              data: [2500000, 2750000, 2540000],
-              borderColor: '#f57f01',
-              borderWidth: 1,
-              backgroundColor: 'rgba(245,127,1,0.5)',
-              label: '2018'
-            }
-          ]
-        },
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-          legend: {
-            display: true,
-            position: "top"
-          },
-          title: {
-            display: false,
-            text: 'Usage History'
-          },
-          scales: {
-            xAxes: [
-              {
-                display: true
-              }
-            ],
-            yAxes: [
-              {
-                display: true,
-                ticks: {
-                  min: 0
-                }
-              }
-            ]
-          }
-        }
-      })
-
-      var timeFormat = 'MM/DD/YYYY HH:mm';
-
-      this.chart = new Chart('timeSeries1', {
-        type: 'line',
-        data: {
-          labels: ["03/18/2018 0:00", "03/18/2018 8:03", "03/18/2018 10:33", "03/18/2018 12:15", "03/18/2018 14:08", "03/18/2018 18:30", "03/18/2018 20:39", "03/18/2018 23:59"],
-          datasets: [
-            {
-              type: 'line',
-              steppedLine: true,
-              data: [0, 1, 0, 1, 0, 1, 0, 0],
-              borderColor: '#008FE0',
-              pointBorderWidth: "0",
-              pointBackgroundColor: "rgba(0,0,0,0)",
-              pointBorderColor: "rgba(0,0,0,0)",
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,143,224,0.5)',
-              label: 'Equipment Enabled'
-            }
-          ]
-        },
-        options: {
-          title: {
-            text: 'Chart.js Combo Time Scale'
-          },
-          legend: {
-            display: false
-          },
-          maintainAspectRatio: false,
-          tooltip: {
-            enabled: false
-          },
-          scales: {
-            xAxes: [{
-              type: 'time',
-              display: true,
-              ticks: {
-                maxRotation: 0
-              },
-              time: {
-                format: timeFormat,
-                unit: 'hour'
-              }
-            }],
-            yAxes: [{
-              display: false
-            }]
-          },
-        }
-      })
-
-      this.chart = new Chart('timeSeries2', {
-        type: 'line',
-        data: {
-          labels: ["03/18/2018 0:00", "03/18/2018 4:03", "03/18/2018 8:53", "03/18/2018 9:15", "03/18/2018 12:18", "03/18/2018 14:30", "03/18/2018 15:15", "03/18/2018 18:45", "03/18/2018 22:15", "03/18/2018 23:59"],
-          datasets: [
-            {
-              type: 'line',
-              steppedLine: true,
-              data: [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
-              borderColor: '#008FE0',
-              pointBorderWidth: "0",
-              pointBackgroundColor: "rgba(0,0,0,0)",
-              pointBorderColor: "rgba(0,0,0,0)",
-              borderWidth: 1,
-              backgroundColor: 'rgba(0,143,224,0.5)',
-              label: 'Equipment Enabled'
-            }
-          ]
-        },
-        options: {
-          title: {
-            text: 'Chart.js Combo Time Scale'
-          },
-          legend: {
-            display: false
-          },
-          maintainAspectRatio: false,
-          tooltip: {
-            enabled: false
-          },
-          scales: {
-            xAxes: [{
-              type: 'time',
-              display: true,
-              ticks: {
-                maxRotation: 0
-              },
-              time: {
-                format: timeFormat,
-                unit: 'hour'
-              }
-            }],
-            yAxes: [{
-              display: false
-            }]
-          },
-        }
-      })
-
     });
 
     this._gsheet.gSheet1()
@@ -521,140 +255,8 @@ export class GasComponent implements OnInit {
         let miscLate = res.rows[0].misclate;
         let miscOther = res.rows[0].miscother;
 
-        console.log(miscTax);
-
-        /*this.chart = new Chart('chartUsageHistory', {
-          type: 'bar',
-          data: {
-            labels: [usage1month, usage2month, usage3month, usage4month, usage5month, usage6month, usage7month, usage8month, usage9month, usage10month, usage11month, usage12month],
-            datasets: [
-              {
-                type: 'bar',
-                data: [usage1, usage2, usage3, usage4, usage5, usage6, usage7, usage8, usage9, usage10, usage11, usage12],
-                borderColor: '#008FE0',
-                borderWidth: 1,
-                backgroundColor: 'rgba(0,143,224,0.5)',
-                label: 'Usage History'
-              },
-              {
-                data: [usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg, usageAvg],
-                type: 'line',
-                borderColor: '#e05100',
-                pointBorderWidth: 0,
-                pointBorderColor: 'rgba(0,0,0,0)',
-                pointBackgroundColor: 'rgba(0,0,0,0)',
-                borderDash: [5, 5],
-                fill: false,
-                borderWidth: 1,
-                backgroundColor: 'rgba(0,0,0,0)',
-                label: 'Usage Average'
-              }
-            ]
-          },
-          options: {
-            maintainAspectRatio: false,
-            responsive: true,
-            legend: {
-              display: true,
-              text: 'Usage',
-              position: 'top'
-            },
-            title: {
-              display: false,
-              text: 'Usage History'
-            },
-            scales: {
-              xAxes: [
-                {
-                  display: true
-                }
-              ],
-              yAxes: [
-                {
-                  display: true
-                }
-              ]
-            }
-          }
-        })*/
-
-        /*this.chart = new Chart('chartPeak', {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              data: [
-                onPkUsageCurrent,
-                offPkUsageCurrent
-              ],
-              backgroundColor: [
-                '#008FE0',
-                '#CCCCCC'
-              ],
-              label: 'Dataset 1'
-            }],
-            labels: [
-              'On Peak',
-              'Off Peak'
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: false,
-              text: 'Chart.js Doughnut Chart'
-            },
-            animation: {
-              animateScale: true,
-              animateRotate: true
-            }
-          }
-        })*/
-
-        /*this.chart = new Chart('chartMisc', {
-          type: 'pie',
-          data: {
-            datasets: [{
-              data: [
-                miscTax,
-                miscLate,
-                miscOther
-              ],
-              backgroundColor: [
-                '#008FE0',
-                '#e05100',
-                '#e0c100'
-              ],
-              label: 'Dataset 1'
-            }],
-            labels: [
-              'Tax',
-              'Late',
-              'Other'
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: false,
-              text: 'Chart.js Doughnut Chart'
-            },
-            animation: {
-              animateScale: true,
-              animateRotate: true
-            }
-          }
-        })*/
+        
       })
-
-    //this.lineChart();
 
   }
 

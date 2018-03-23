@@ -41,6 +41,14 @@ export const routes: Routes = [
       {
         path: 'lighting',
         loadChildren: './pages/lighting/lighting.module#LightingModule'
+      },
+      {
+        path: 'water',
+        loadChildren: './pages/water/water.module#WaterModule'
+      },
+      {
+        path: 'weather',
+        loadChildren: './pages/local-forecast/local-forecast.module#LocalForecastModule'
       }
     ]
   },

@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes,
      RouterModule } from '@angular/router';
 
-import { UtilityComponent } from './utility.component';
+import { LocalForecastComponent } from './local-forecast.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UtilityComponent,
+    component: LocalForecastComponent,
     data: {
-      title: 'Utility Bill'
+      title: 'Local Forecast'
     }
   }
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UtilityRoutingModule {}
+export class LocalForecastRoutingModule {}
