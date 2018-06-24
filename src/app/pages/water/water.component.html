@@ -2,13 +2,13 @@
   <h2 class="font-bold text-uppercase pb-3 pt-2 text-muted"><i class="fa fa-tint"></i> Water</h2>
   <div class="row">
     <div class="col-lg-4">
-      <div [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12, 'card-accent-success': gsCalc?.rows[0].usagehist0 < gsCalc?.rows[0].usagehist12}" class="card">
+      <div [ngClass]="{'card-accent-info': gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12, 'card-accent-success': gsCalc?.rows[0].usagehist0 < gsCalc?.rows[0].usagehist12}" class="card">
         <div class="card-block">
           <h5 class="card-title">Monthly Total</h5>
           <h1 class="font-bold">50,000 <span class="text-secondary font-lg font-sans-serif">gal</span></h1>
           <div *ngIf="gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12; then overYOY; else underYOY"></div>
           <ng-template #overYOY>
-            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].yoydiff }} over last year</p>
+            <p class="text-info mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].yoydiff }} over last year</p>
           </ng-template>
           <ng-template #underYOY>
             <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].yoydiff }} under year</p>
@@ -17,13 +17,13 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].highusageoveravg > 0.25, 'card-accent-success': gsCalc?.rows[0].highusageoveravg < 0.25}">
+      <div class="card" [ngClass]="{'card-accent-info': gsCalc?.rows[0].highusageoveravg > 0.25, 'card-accent-success': gsCalc?.rows[0].highusageoveravg < 0.25}">
         <div class="card-block">
           <h5 class="card-title">High (Past Year)</h5>
           <h1 class="font-bold">75,000 <span class="text-secondary font-lg font-sans-serif">gal</span></h1>
           <div *ngIf="gsCalc?.rows[0].highusageoveravg > 0.25; then overTarget; else underTarget"></div>
           <ng-template #overTarget>
-            <p class="text-danger mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
+            <p class="text-info mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
           </ng-template>
           <ng-template #underTarget>
             <p class="text-success mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average usage</p>
@@ -32,13 +32,13 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget, 'card-accent-success': gsCalc?.rows[0].usagehistavg < gsCalc?.rows[0].usagehistavgtarget }">
+      <div class="card" [ngClass]="{'card-accent-info': gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget, 'card-accent-success': gsCalc?.rows[0].usagehistavg < gsCalc?.rows[0].usagehistavgtarget }">
         <div class="card-block">
           <h5 class="card-title">Average (Past Year)</h5>
           <h1 class="font-bold">65,000 <span class="text-secondary font-lg font-sans-serif">gal</span></h1>
           <div *ngIf="gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget; then overAvgTarget; else underAvgTarget"></div>
           <ng-template #overAvgTarget>
-            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} over target</p>
+            <p class="text-info mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} over target</p>
           </ng-template>
           <ng-template #underAvgTarget>
             <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} under target</p>
@@ -102,7 +102,7 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
             <div class="col-2">
               
@@ -113,16 +113,16 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
 
@@ -133,19 +133,19 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger h-100"></div>
+              <div class="bg-info h-100"></div>
             </div>
             <div class="col-2">
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
           </div>
           <div class="row no-gutters">
@@ -153,19 +153,19 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighterest h-100"></div>
+              <div class="bg-info-lighterest h-100"></div>
             </div>
           </div>
           <div class="row no-gutters small text-muted">
@@ -173,39 +173,19 @@
               12PM
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
-            </div>
-          </div>
-          <div class="row no-gutters small text-muted">
-            <div class="col-2">
-              
-            </div>
-            <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
-            </div>
-            <div class="col-2">
-              <div class="bg-danger h-100"></div>
-            </div>
-            <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
-            </div>
-            <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
-            </div>
-            <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
           </div>
           <div class="row no-gutters small text-muted">
@@ -213,19 +193,39 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
+            </div>
+            <div class="col-2">
+              <div class="bg-info-lighter h-100"></div>
+            </div>
+            <div class="col-2">
+              <div class="bg-info-light h-100"></div>
+            </div>
+          </div>
+          <div class="row no-gutters small text-muted">
+            <div class="col-2">
+              
+            </div>
+            <div class="col-2">
+              <div class="bg-info-lightest h-100"></div>
+            </div>
+            <div class="col-2">
+              <div class="bg-info-lighter h-100"></div>
+            </div>
+            <div class="col-2">
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
           </div>
           <div class="row no-gutters small text-muted">
@@ -233,13 +233,13 @@
 
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
               
@@ -253,19 +253,19 @@
               4PM
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
           </div>
           <div class="row no-gutters text-muted small">
@@ -282,7 +282,7 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-lightest h-100"></div>
+              <div class="bg-info-lightest h-100"></div>
             </div>
             <div class="col-2">
               
@@ -293,16 +293,16 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
 
@@ -313,19 +313,19 @@
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger h-100"></div>
+              <div class="bg-info h-100"></div>
             </div>
             <div class="col-2">
               
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
           </div>
           <div class="row no-gutters small text-muted">
@@ -333,19 +333,19 @@
               8PM
             </div>
             <div class="col-2">
-              <div class="bg-danger-light h-100"></div>
+              <div class="bg-info-light h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighter h-100"></div>
+              <div class="bg-info-lighter h-100"></div>
             </div>
             <div class="col-2">
-              <div class="bg-danger-lighterest h-100"></div>
+              <div class="bg-info-lighterest h-100"></div>
             </div>
           </div>
           <div class="row no-gutters text-center small text-muted mt-2">

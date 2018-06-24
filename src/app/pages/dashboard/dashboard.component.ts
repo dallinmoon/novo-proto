@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   weatherDataLastYear: any;
   myData: any;
   gs: any;
-  gsSiteInfo: any;
+  gsDashboard: any;
   gsMeters: any;
   gsCalc: any;
   chart = [];
@@ -35,16 +35,20 @@ export class DashboardComponent implements OnInit {
   }
 
   dataReady: boolean = false;
+  gsDashboardDataReady: boolean = false;
+  weatherDataReady: boolean = false;
 
   ngOnInit(): void {
 
-    this._gsheet.gSheetSiteInfo().subscribe(res => {
-      this.gsSiteInfo = res;
+    this._gsheet.gDashboard().subscribe(res => {
+      this.gsDashboard = res;
+      this.gsDashboardDataReady = true;
     });
 
     this._weather.dailyForecast()
       .subscribe(res => {
         this.weatherData = res;
+        this.weatherDataReady = true;
 
         let date1 = new Date(res.daily.data[0].time * 1000);
         let date2 = new Date(res.daily.data[1].time * 1000);

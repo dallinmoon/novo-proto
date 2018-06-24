@@ -1,0 +1,262 @@
+<div class="usd-content-area usd-content-area-standard animated fadeIn">
+  <h2 class="font-bold text-uppercase pb-3 pt-2 text-muted"><i class="fa fa-dot-circle"></i> Rules</h2>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-header-title mb-0">Custom Rule Summary</h4>
+        </div>
+        <div class="card-block card-block-list p-0">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="list mb-0 list-sm">
+                <div class="item item-clickable" (click)="rulesModal.show()">
+                  <div class="avatar avatar-sm bg-white border-warning">
+                    <i class="fal fa-exclamation-triangle text-warning"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="input-wrapper">
+                      <div class="item-label">
+                        <div class="row align-items-center">
+                          <div class="col-lg-5">
+                            <h5 class="mb-0">Below Lockout Temp</h5>
+                            <p class="item-desc">Time where an RTU is in a cooling mode and the outside temp is below the lockout temp</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-3 mt-lg-0">
+                            <h4 class="font-bold mb-0">221</h4>
+                            <p class="mb-0">Sites</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">2,900</h4>
+                            <p class="mb-0">Units</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">200</h4>
+                            <p class="mb-0">Hours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-end item-end-caret">
+                    <i class="fa fa-angle-right"></i>
+                  </div>
+                </div>
+                <div class="item item-clickable" (click)="rulesModal.show()">
+                  <div class="avatar avatar-sm bg-white border-danger">
+                    <i class="fal fa-exclamation-circle text-danger"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="input-wrapper">
+                      <div class="item-label">
+                        <div class="row align-items-center">
+                          <div class="col-lg-5">
+                            <h5 class="mb-0">Fan Not Running</h5>
+                            <p class="item-desc">Time where the RTU is commanded on but the fan is not running (no current or feedback from the VFD)</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-3 mt-lg-0">
+                            <h4 class="font-bold mb-0">456</h4>
+                            <p class="mb-0">Sites</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">5,600</h4>
+                            <p class="mb-0">Units</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">750</h4>
+                            <p class="mb-0">Hours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-end item-end-caret">
+                    <i class="fa fa-angle-right"></i>
+                  </div>
+                </div>
+                <div class="item item-clickable" (click)="rulesModal.show()">
+                  <div class="avatar avatar-sm bg-white border-success">
+                    <i class="fal fa-thumbs-up text-success"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="input-wrapper">
+                      <div class="item-label">
+                        <div class="row align-items-center">
+                          <div class="col-lg-5">
+                            <h5 class="mb-0">Heating Valve Open</h5>
+                            <p class="item-desc">Time where the RTU has a heating valve open or electric heating coil commanded on and is economizing at the same time.</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-3 mt-lg-0">
+                            <h4 class="font-bold mb-0">53</h4>
+                            <p class="mb-0">Sites</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">130</h4>
+                            <p class="mb-0">Units</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">45</h4>
+                            <p class="mb-0">Hours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-end item-end-caret">
+                    <i class="fa fa-angle-right"></i>
+                  </div>
+                </div>
+                <div class="item item-clickable" (click)="rulesModal.show()">
+                  <div class="avatar avatar-sm bg-white border-warning">
+                    <i class="fal fa-exclamation-triangle text-warning"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="input-wrapper">
+                      <div class="item-label">
+                        <div class="row align-items-center">
+                          <div class="col-lg-5">
+                            <h5 class="mb-0">Out of Scheduled Times</h5>
+                            <p class="item-desc">Time where the RTU is running but there is no occupancy or it is out of scheduled times and there is no call for heating or cooling.</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-3 mt-lg-0">
+                            <h4 class="font-bold mb-0">378</h4>
+                            <p class="mb-0">Sites</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">725</h4>
+                            <p class="mb-0">Units</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">442</h4>
+                            <p class="mb-0">Hours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-end item-end-caret">
+                    <i class="fa fa-angle-right"></i>
+                  </div>
+                </div>
+                <div class="item item-clickable" (click)="rulesModal.show()">
+                  <div class="avatar avatar-sm bg-white border-danger">
+                    <i class="fal fa-exclamation-circle text-danger"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="input-wrapper">
+                      <div class="item-label">
+                        <div class="row align-items-center">
+                          <div class="col-lg-5">
+                            <h5 class="mb-0">Cooling Valve Open</h5>
+                            <p class="item-desc">Time where the RTU is running but there is no occupancy or it is out of scheduled times and there is no call for heating or cooling.</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-3 mt-lg-0">
+                            <h4 class="font-bold mb-0">1,321</h4>
+                            <p class="mb-0">Sites</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">4,500</h4>
+                            <p class="mb-0">Units</p>
+                          </div>
+                          <div class="col-lg-2 text-lg-right mt-2 mt-lg-0">
+                            <h4 class="font-bold mb-0">878</h4>
+                            <p class="mb-0">Hours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-end item-end-caret">
+                    <i class="fa fa-angle-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title font-bold">Rules By Site</h4>
+          <div margin-bottom style="display: block;">
+            <canvas baseChart width="300" height="100"
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [colors]="barChartColors"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" bsModal #rulesModal="bs-modal" [config]="{backdrop: 'static'}"
+    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pull-left">
+          <h4 class="modal-title">Below Lockout Temp</h4>
+          <p class="mb-0">May 1, 2018 - May 31, 2018</p>
+        </div>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="rulesModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Site</th>
+              <th scope="col">Equipment</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Santa Monica</th>
+              <td>SM-RTU-1</td>
+              <td>4 Hours</td>
+              <td class="text-success">$165</td>
+            </tr>
+            <tr>
+              <th scope="row">Tustin</th>
+              <td>Tustin RTU-1</td>
+              <td>10hr</td>
+              <td class="text-success">$224</td>
+            </tr>
+            <tr>
+              <th scope="row">Mission Viejo</th>
+              <td>MV-RTU-2</td>
+              <td>50 hours</td>
+              <td class="text-warning">$550</td>
+            </tr>
+            <tr>
+              <th scope="row">Santa Clarita</th>
+              <td>SC-RTU-1</td>
+              <td>75 Hours</td>
+              <td class="text-success">$800</td>
+            </tr>
+            <tr>
+              <th scope="row">Huntington Beach</th>
+              <td>HB-RTU-3</td>
+              <td>25 Hours</td>
+              <td class="text-danger">$200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

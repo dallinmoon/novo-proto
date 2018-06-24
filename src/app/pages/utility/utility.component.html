@@ -2,46 +2,46 @@
   <h2 class="font-bold text-uppercase pt-2 pb-3 text-muted"><i class="fa fa-usd-circle"></i> Utility Bill</h2>
   <div class="row">
     <div class="col-lg-4">
-      <div [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12, 'card-accent-success': gsCalc?.rows[0].usagehist0 < gsCalc?.rows[0].usagehist12}" class="card">
+      <div [ngClass]="{'card-accent-danger': gsCalc?.rows[0].totalchg > gsCalc?.rows[0].totalchglastyear, 'card-accent-success': gsCalc?.rows[0].totalchg < gsCalc?.rows[0].totalchglastyear}" class="card">
         <div class="card-block">
           <h5 class="card-title">Monthly Total</h5>
-          <h1 class="font-bold">$205,000</h1>
-          <div *ngIf="gsCalc?.rows[0].usagehist0 > gsCalc?.rows[0].usagehist12; then overYOY; else underYOY"></div>
+          <h1 class="font-bold">${{ gsCalc?.rows[0].totalchg | number:'1.0-0' }}</h1>
+          <div *ngIf="gsCalc?.rows[0].totalchg > gsCalc?.rows[0].totalchglastyear; then overYOY; else underYOY"></div>
           <ng-template #overYOY>
-            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].yoydiff }} over last year</p>
+            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].totalchgyoydiff | percent:'1.1-2' }} over last year</p>
           </ng-template>
           <ng-template #underYOY>
-            <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].yoydiff }} under year</p>
+            <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].totalchgyoydiff | percent:'1.1-2' }} under year</p>
           </ng-template>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].highusageoveravg > 0.25, 'card-accent-success': gsCalc?.rows[0].highusageoveravg < 0.25}">
+      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].costhighoveravgdiffpct > 0.20, 'card-accent-success': gsCalc?.rows[0].costhighoveravgdiffpct < 0.20}">
         <div class="card-block">
           <h5 class="card-title">High (Past Year)</h5>
-          <h1 class="font-bold">$280,000</h1>
-          <div *ngIf="gsCalc?.rows[0].highusageoveravg > 0.25; then overTarget; else underTarget"></div>
+          <h1 class="font-bold">${{ gsCalc?.rows[0].highcost | number:'1.0-0' }}</h1>
+          <div *ngIf="gsCalc?.rows[0].costhighoveravgdiffpct > 0.20; then overTarget; else underTarget"></div>
           <ng-template #overTarget>
-            <p class="text-danger mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average spend</p>
+            <p class="text-danger mb-0">{{ gsCalc?.rows[0].highcostmonthlabel }} was {{ gsCalc?.rows[0].costhighoveravgdiffpct | percent:'1.1-2' }} over average spend</p>
           </ng-template>
           <ng-template #underTarget>
-            <p class="text-success mb-0">{{ gsCalc?.rows[0].highmonthlabel }} was {{ gsCalc?.rows[0].highusageoveravg | percent:'1.1-2' }} over average spend</p>
+            <p class="text-success mb-0">{{ gsCalc?.rows[0].highcostmonthlabel }} was {{ gsCalc?.rows[0].costhighoveravgdiffpct | percent:'1.1-2' }} over average spend</p>
           </ng-template>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget, 'card-accent-success': gsCalc?.rows[0].usagehistavg < gsCalc?.rows[0].usagehistavgtarget }">
+      <div class="card" [ngClass]="{'card-accent-danger': gsCalc?.rows[0].costhistavg > gsCalc?.rows[0].costhistavgtarget, 'card-accent-success': gsCalc?.rows[0].costhistavg < gsCalc?.rows[0].costhistavgtarget }">
         <div class="card-block">
           <h5 class="card-title">Average (Past Year)</h5>
-          <h1 class="font-bold">$225,000</h1>
-          <div *ngIf="gsCalc?.rows[0].usagehistavg > gsCalc?.rows[0].usagehistavgtarget; then overAvgTarget; else underAvgTarget"></div>
+          <h1 class="font-bold">${{ gsCalc?.rows[0].costhistavg | number:'1.0-0' }}</h1>
+          <div *ngIf="gsCalc?.rows[0].costhistavg > gsCalc?.rows[0].costhistavgtarget; then overAvgTarget; else underAvgTarget"></div>
           <ng-template #overAvgTarget>
-            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} over target</p>
+            <p class="text-danger mb-0"><i class="fas fa-caret-up"></i> {{ gsCalc?.rows[0].costhistavgdiffpct | percent:'1.1-2' }} over target</p>
           </ng-template>
           <ng-template #underAvgTarget>
-            <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].usagehistavgdiff | percent:'1.1-2' }} under target</p>
+            <p class="text-success mb-0"><i class="fas fa-caret-down"></i> {{ gsCalc?.rows[0].costhistavgdiffpct | percent:'1.1-2' }} under target</p>
           </ng-template>
         </div>
       </div>
@@ -216,6 +216,7 @@
           </div>
         </div>
         <div class="card-footer">
+          <button type="button" class="btn btn-primary btn-primary float-right" (click)="budgetModal.show()">Add Goals</button>
           <button type="button" class="btn btn-primary btn-link float-right" (click)="budgetModal.show()">More Details</button>
         </div>
       </div>
@@ -269,6 +270,7 @@
           </div>
         </div>
         <div class="card-footer">
+          <button type="button" class="btn btn-primary btn-primary float-right" (click)="budgetModal.show()">Add Goals</button>
           <button type="button" class="btn btn-primary btn-link float-right" (click)="consumptionModal.show()">More Details</button>
         </div>
       </div>

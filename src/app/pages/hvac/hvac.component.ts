@@ -23,7 +23,7 @@ export class HvacComponent implements OnInit {
 
   myData: any;
   gs: any;
-  gsSiteInfo: any;
+  gsDashboard: any;
   gsMeters: any;
   gsCalc: any;
   chart = [];
@@ -35,8 +35,8 @@ export class HvacComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._gsheet.gSheetSiteInfo().subscribe(res => {
-      this.gsSiteInfo = res;
+    this._gsheet.gDashboard().subscribe(res => {
+      this.gsDashboard = res;
     });
 
     this._gsheet.gSheetMetersCalc().subscribe(res => {

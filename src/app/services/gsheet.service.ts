@@ -13,22 +13,27 @@ export class GSheetService {
   constructor(private _http: HttpClient) { }
 
   gSheet1() {
-    return this._http.get<ChartResponse>("https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg")
+    return this._http.get<ChartResponse>("https://crossorigin.me/https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg")
       .map(result => result);
   }
 
-  gSheetSiteInfo() {
-    return this._http.get<ChartResponse>("https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg&sheet=2")
+  gDashboard() {
+    return this._http.get<ChartResponse>("https://crossorigin.me/https://stormy-forest-17892.herokuapp.com/api?id=1xi9qx5vQrv4rloBt_tkxUtAJJysgYqIKK1EWY7oGfKY&sheet=2")
       .map(result => result);
   }
+
+  /*gDashboard() {
+    return this._http.get<ChartResponse>("https://crossorigin.me/https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg&sheet=2")
+      .map(result => result);
+  }*/
 
   gSheetMeters() {
-    return this._http.get<ChartResponse>("https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg&sheet=3")
+    return this._http.get<ChartResponse>("https://crossorigin.me/https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg&sheet=3")
       .map(result => result);
   }
 
   gSheetMetersCalc() {
-    return this._http.get<ChartResponse>("https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg&sheet=5")
+    return this._http.get<ChartResponse>("https://crossorigin.me/https://stormy-forest-17892.herokuapp.com/api?id=1k8TZTBBCpGEm2gYtFhCDJkVA-fS-Mo6iHjyR_Ri_Eqg&sheet=7")
       .map(result => result);
   }
 }

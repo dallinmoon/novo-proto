@@ -43,6 +43,14 @@ export const routes: Routes = [
         loadChildren: './pages/lighting/lighting.module#LightingModule'
       },
       {
+        path: 'rules',
+        loadChildren: './pages/rules/rules.module#RulesModule'
+      },
+      {
+        path: 'sustainability',
+        loadChildren: './pages/sustainability/sustainability.module#SustainabilityModule'
+      },
+      {
         path: 'water',
         loadChildren: './pages/water/water.module#WaterModule'
       },

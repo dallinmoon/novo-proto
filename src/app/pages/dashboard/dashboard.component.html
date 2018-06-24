@@ -1,24 +1,107 @@
-<div class="usd-content-area usd-content-area-standard animated fadeIn">
-  <div class="row">
+<!--<div class="usd-content-area usd-content-area-standard animated fadeIn">
+  <div *ngIf="!gsDashboardDataReady">
+    <div class="skeleton skeleton-card">
+      <div class="card">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="big-block"></div>
+            </div>
+            <div class="col-lg-4">
+              <p></p>
+              <p></p>
+              <p></p>
+              <p></p>
+              <p></p>
+            </div>
+            <div class="col-lg-4">
+              <p class="mt-3"></p>
+              <button></button>
+              <p class="mt-3"></p>
+              <button></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="skeleton skeleton-card">
+        <div class="card">
+          <div class="card-block">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="small-block"></div>
+              </div>
+              <div class="col-lg-4">
+                <div class="small-block"></div>
+              </div>
+              <div class="col-lg-4">
+                <div class="small-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="skeleton skeleton-list">
+        <div class="list">
+          <div class="item">
+            <div class="avatar"></div>
+            <div class="item-inner">
+              <div class="input-wrapper">
+                <div class="item-label">
+                  <h4></h4>
+                  <p></p>
+                  <button></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="avatar"></div>
+            <div class="item-inner">
+              <div class="input-wrapper">
+                <div class="item-label">
+                  <h4></h4>
+                  <p></p>
+                  <button></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="avatar"></div>
+            <div class="item-inner">
+              <div class="input-wrapper">
+                <div class="item-label">
+                  <h4></h4>
+                  <p></p>
+                  <button></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="gsDashboardDataReady">
     <div class="col-12">
       <div class="card">
         <div class="card-block">
           <div class="row">
             <div class="col-lg-4">
-              <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?center={{ gsSiteInfo?.rows[0].maplat }},{{ gsSiteInfo?.rows[0].maplong }}&zoom={{ gsSiteInfo?.rows[0].mapzoom }}&size=800x400&maptype=roadmap&markers=color:blue&key=AIzaSyCRiDbCDdIt-_o1_L2gHWw9268177i6a4Q">
+              <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?center={{ gsDashboard?.rows[0].maplat }},{{ gsDashboard?.rows[0].maplong }}&zoom={{ gsDashboard?.rows[0].mapzoom }}&size=800x400&maptype=roadmap&markers=color:blue&key=AIzaSyCRiDbCDdIt-_o1_L2gHWw9268177i6a4Q">
             </div>
             <div class="col-lg-4">
               <div class="row">
                 <div class="col-12">
-                  <h4 class="mb-1 mt-3 mt-lg-0">{{ gsSiteInfo?.rows[0].site }}</h4>
+                  <h4 class="mb-1 mt-3 mt-lg-0">{{ gsDashboard?.rows[0].site }}</h4>
                   <div class="text-secondary small">
-                    <p class="mb-0">{{ gsSiteInfo?.rows[0].address }}</p>
-                    <p>{{ gsSiteInfo?.rows[0].city }} {{ gsSiteInfo?.rows[0].state }} {{ gsSiteInfo?.rows[0].zip }}</p>
+                    <p class="mb-0">{{ gsDashboard?.rows[0].address }}</p>
+                    <p>{{ gsDashboard?.rows[0].city }} {{ gsDashboard?.rows[0].state }} {{ gsDashboard?.rows[0].zip }}</p>
                   </div>
-                  <p class="mb-0"><strong>Area:</strong> {{ gsSiteInfo?.rows[0].area }} sq. ft.</p>
-                  <p class="mb-0"><strong>Buildings:</strong> {{ gsSiteInfo?.rows[0].buildings }}</p>
-                  <p class="mb-0"><strong>Occupants:</strong> {{ gsSiteInfo?.rows[0].occupants }}</p>
-                  <p class="mb-0"><strong>Type:</strong> {{ gsSiteInfo?.rows[0].type }}</p>
+                  <p class="mb-0"><strong>Area:</strong> {{ gsDashboard?.rows[0].area }} sq. ft.</p>
+                  <p class="mb-0"><strong>Buildings:</strong> {{ gsDashboard?.rows[0].buildings }}</p>
+                  <p class="mb-0"><strong>Occupants:</strong> {{ gsDashboard?.rows[0].occupants }}</p>
+                  <p class="mb-0"><strong>Type:</strong> {{ gsDashboard?.rows[0].type }}</p>
                 </div>
               </div>
             </div>
@@ -33,7 +116,7 @@
                     <div class="item-input-wrapper">
                       <div class="item-label">
                         <p class="mb-0 text-muted">Active Meters</p>
-                        <h3 class="mb-0">12</h3>
+                        <h3 class="mb-0">{{ gsDashboard?.rows[0].meterstatusactive }}</h3>
                       </div>
                     </div>
                   </div>
@@ -46,7 +129,7 @@
                     <div class="item-input-wrapper">
                       <div class="item-label">
                         <p class="mb-0 text-muted">Offline Meters</p>
-                        <h3 class="mb-0">0</h3>
+                        <h3 class="mb-0">{{ gsDashboard?.rows[0].meterstatusoffline }}</h3>
                       </div>
                     </div>
                   </div>
@@ -59,7 +142,7 @@
                     <div class="item-input-wrapper">
                       <div class="item-label">
                         <p class="mb-0 text-muted">Spikes</p>
-                        <h3 class="mb-0">3</h3>
+                        <h3 class="mb-0">{{ gsDashboard?.rows[0].meterstatusspikes }}</h3>
                       </div>
                     </div>
                   </div>
@@ -71,11 +154,73 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="gsDashboardDataReady">
     <div class="col-12">
       <div class="card">
         <div class="card-block">
-          <h4 class="card-title font-bold">Summary - This Year</h4>
+          <h4>Active Meters</h4>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="list list-sm mb-3 clickable" [routerLink]="['/app/power']">
+                <div class="item bg-gray-lightest py-1">
+                  <div class="avatar avatar-sm bg-danger border-white">
+                    <i class="fas fa-bolt text-light"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <h4 class="mb-0">Power</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="item-end font-bold">{{ gsDashboard?.rows[0].activemeterspower }}</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="list list-sm mb-3 clickable" [routerLink]="['/app/water']">
+                <div class="item bg-gray-lightest py-1">
+                  <div class="avatar avatar-sm bg-info border-white">
+                    <i class="fas fa-tint text-light"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <h4 class="mb-0">Water</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="item-end font-bold">{{ gsDashboard?.rows[0].activemeterswater }}</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="list list-sm mb-3 clickable" [routerLink]="['/app/gas']">
+                <div class="item bg-gray-lightest py-1">
+                  <div class="avatar avatar-sm bg-success border-white">
+                    <i class="fas fa-fire text-light"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <h4 class="mb-0">Gas</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="item-end font-bold">{{ gsDashboard?.rows[0].activemetersgas }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="gsDashboardDataReady">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Summary - This Year</h4>
           <div class="list list-sm mb-0">
             <div class="item py-1 px-0 item-bottom-border">
               <div class="avatar avatar-sm bg-white border-success">
@@ -85,11 +230,11 @@
                 <div class="item-input-wrapper">
                   <div class="item-label">
                     <p class="mb-0 text-muted">Total Utility Costs</p>
-                    <h2 class="mb-0">$ 64,205</h2>
+                    <h2 class="mb-0">${{ gsDashboard?.rows[0].summaryutility | number:'1.0-0' }}</h2>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-link item-end">View <i class="fas fa-angle-right"></i></button>
+              <button class="btn btn-link item-end" [routerLink]="['/app/utility']">View <i class="fas fa-angle-right"></i></button>
             </div>
             <div class="item py-1 px-0 item-bottom-border">
               <div class="avatar avatar-sm bg-white border-danger">
@@ -99,11 +244,11 @@
                 <div class="item-input-wrapper">
                   <div class="item-label">
                     <p class="mb-0 text-muted">Total Electricity Usage</p>
-                    <h2 class="mb-0">721,789 <span class="font-sm text-muted">kW</span></h2>
+                    <h2 class="mb-0">{{ gsDashboard?.rows[0].summarypower | number:'1.0-0' }} <span class="font-sm text-muted">kW</span></h2>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-link item-end">View <i class="fas fa-angle-right"></i></button>
+              <button class="btn btn-link item-end" [routerLink]="['/app/power']">View <i class="fas fa-angle-right"></i></button>
             </div>
             <div class="item py-1 px-0 item-bottom-border">
               <div class="avatar avatar-sm bg-white border-info">
@@ -113,25 +258,11 @@
                 <div class="item-input-wrapper">
                   <div class="item-label">
                     <p class="mb-0 text-muted">Total Water Usage</p>
-                    <h2 class="mb-0">12,210,100 <span class="font-sm text-muted">gal</span></h2>
+                    <h2 class="mb-0">{{ gsDashboard?.rows[0].summarywater | number:'1.0-0' }} <span class="font-sm text-muted">gal</span></h2>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-link item-end">View <i class="fas fa-angle-right"></i></button>
-            </div>
-            <div class="item py-1 px-0 item-bottom-border">
-              <div class="avatar avatar-sm bg-white border-muted">
-                <i class="fas fa-asterisk text-muted"></i>
-              </div>
-              <div class="item-inner">
-                <div class="item-input-wrapper">
-                  <div class="item-label">
-                    <p class="mb-0 text-muted">Total HVAC</p>
-                    <h2 class="mb-0">541,890 <span class="font-sm text-muted">lbs CO<sub>2</sub></span></h2>
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-link item-end">View <i class="fas fa-angle-right"></i></button>
+              <button class="btn btn-link item-end" [routerLink]="['/app/water']">View <i class="fas fa-angle-right"></i></button>
             </div>
             <div class="item py-1 px-0 item-bottom-border">
               <div class="avatar avatar-sm bg-white border-success">
@@ -141,34 +272,20 @@
                 <div class="item-input-wrapper">
                   <div class="item-label">
                     <p class="mb-0 text-muted">Total Gas Usage</p>
-                    <h2 class="mb-0">432,800 <span class="font-sm text-muted">feet<sup>3</sup></span></h2>
+                    <h2 class="mb-0">{{ gsDashboard?.rows[0].summarygas | number:'1.0-0' }} <span class="font-sm text-muted">feet<sup>3</sup></span></h2>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-link item-end">View <i class="fas fa-angle-right"></i></button>
-            </div>
-            <div class="item py-1 px-0 item-bottom-border">
-              <div class="avatar avatar-sm bg-white border-warning">
-                <i class="fas fa-lightbulb text-warning"></i>
-              </div>
-              <div class="item-inner">
-                <div class="item-input-wrapper">
-                  <div class="item-label">
-                    <p class="mb-0 text-muted">Lighting Units</p>
-                    <h2 class="mb-0">8,000 <span class="font-sm text-muted">lights</span></h2>
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-link item-end">View <i class="fas fa-angle-right"></i></button>
+              <button class="btn btn-link item-end" [routerLink]="['/app/gas']">View <i class="fas fa-angle-right"></i></button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-block">
-      <h4 class="mb-0">Today in {{ gsSiteInfo?.rows[0].city }}, {{ gsSiteInfo?.rows[0].state }}</h4>
+  <div class="card" *ngIf="weatherDataReady">
+    <div class="card-block" *ngIf="weatherDataReady">
+      <h4 class="mb-0">Today in {{ gsDashboard?.rows[0].city }}, {{ gsDashboard?.rows[0].state }}</h4>
       <div class="row align-items-center mt-3">
         <div class="col-lg-2 col-md-12 col-12 text-center">
           <div class="d-flex flex-row justify-content-center">
@@ -218,7 +335,7 @@
         </div>
       </div>
     </div>
-    <div class="card-footer bg-dark text-light">
+    <div class="card-footer bg-dark text-light" *ngIf="weatherDataReady">
       <div class="row">
         <div class="col-12">
           <div class="row">
@@ -266,14 +383,89 @@
       </div>
     </div>
   </div>
+</div>-->
+
+<div class="usd-content-area usd-content-area-standard animated fadeIn">
   <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-lg-4">
+              <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?center=26.1599243,-81.6395034&zoom=10&size=800x400&maptype=roadmap&markers=color:blue&key=AIzaSyCRiDbCDdIt-_o1_L2gHWw9268177i6a4Q">
+            </div>
+            <div class="col-lg-4">
+              <div class="row">
+                <div class="col-12">
+                  <h4 class="mb-1 mt-3 mt-lg-0">University of Richmond</h4>
+                  <div class="text-secondary small">
+                    <p class="mb-0">1 Avenue of the Arts</p>
+                    <p>Richmond, VA 23173</p>
+                  </div>
+                  <p class="mb-0"><strong>Area:</strong> 953,090 sq. ft.</p>
+                  <p class="mb-0"><strong>Buildings:</strong> 43</p>
+                  <p class="mb-0"><strong>Occupants:</strong> 4180</p>
+                  <p class="mb-0"><strong>Type:</strong> Education, University</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 mt-lg-0 mt-3">
+              <h4>Meter Status</h4>
+              <div class="list list-sm mb-0">
+                <div class="item py-1 px-0 item-bottom-border">
+                  <div class="avatar avatar-sm bg-white border-white">
+                    <i class="fal fa-check text-success"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <p class="mb-0 text-muted">Active Meters</p>
+                        <h3 class="mb-0">29</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item py-1 px-0 item-bottom-border">
+                  <div class="avatar avatar-sm bg-white border-white">
+                    <i class="fal fa-ban text-danger"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <p class="mb-0 text-muted">Offline Meters</p>
+                        <h3 class="mb-0">0</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item py-1 px-0 item-bottom-border">
+                  <div class="avatar avatar-sm bg-white border-white">
+                    <i class="fal fa-exclamation-triangle text-warning"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-input-wrapper">
+                      <div class="item-label">
+                        <p class="mb-0 text-muted">Spikes</p>
+                        <h3 class="mb-0">3</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="gsDashboardDataReady">
     <div class="col-12">
       <div class="card">
         <div class="card-block">
           <h4>Active Meters</h4>
           <div class="row">
             <div class="col-lg-4">
-              <div class="list list-sm mb-3 clickable">
+              <div class="list list-sm mb-3 clickable" [routerLink]="['/app/power']">
                 <div class="item bg-gray-lightest py-1">
                   <div class="avatar avatar-sm bg-danger border-white">
                     <i class="fas fa-bolt text-light"></i>
@@ -285,12 +477,12 @@
                       </div>
                     </div>
                   </div>
-                  <h1 class="item-end font-bold">12</h1>
+                  <h1 class="item-end font-bold">{{ gsDashboard?.rows[0].activemeterspower }}</h1>
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="list list-sm mb-3 clickable">
+              <div class="list list-sm mb-3 clickable" [routerLink]="['/app/water']">
                 <div class="item bg-gray-lightest py-1">
                   <div class="avatar avatar-sm bg-info border-white">
                     <i class="fas fa-tint text-light"></i>
@@ -302,29 +494,12 @@
                       </div>
                     </div>
                   </div>
-                  <h1 class="item-end font-bold">12</h1>
+                  <h1 class="item-end font-bold">{{ gsDashboard?.rows[0].activemeterswater }}</h1>
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="list list-sm mb-3 clickable">
-                <div class="item bg-gray-lightest py-1">
-                  <div class="avatar avatar-sm bg-secondary border-white">
-                    <i class="fas fa-asterisk text-light"></i>
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-input-wrapper">
-                      <div class="item-label">
-                        <h4 class="mb-0">HVAC</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <h1 class="item-end font-bold">03</h1>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="list list-sm mb-3 clickable">
+              <div class="list list-sm mb-3 clickable" [routerLink]="['/app/gas']">
                 <div class="item bg-gray-lightest py-1">
                   <div class="avatar avatar-sm bg-success border-white">
                     <i class="fas fa-fire text-light"></i>
@@ -336,24 +511,174 @@
                       </div>
                     </div>
                   </div>
-                  <h1 class="item-end font-bold">05</h1>
+                  <h1 class="item-end font-bold">{{ gsDashboard?.rows[0].activemetersgas }}</h1>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="list list-sm mb-3 clickable">
-                <div class="item bg-gray-lightest py-1">
-                  <div class="avatar avatar-sm bg-warning border-white">
-                    <i class="fas fa-lightbulb text-light"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="gsDashboardDataReady">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Summary - This Year</h4>
+          <div class="list list-sm mb-0">
+            <div class="item py-1 px-0 item-bottom-border">
+              <div class="avatar avatar-sm bg-white border-success">
+                <i class="fas fa-dollar-sign text-success"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-input-wrapper">
+                  <div class="item-label">
+                    <p class="mb-0 text-muted">Total Utility Costs</p>
+                    <h2 class="mb-0">${{ gsDashboard?.rows[0].summaryutility | number:'1.0-0' }}</h2>
                   </div>
-                  <div class="item-inner">
-                    <div class="item-input-wrapper">
-                      <div class="item-label">
-                        <h4 class="mb-0">Lighting</h4>
-                      </div>
-                    </div>
+                </div>
+              </div>
+              <button class="btn btn-link item-end" [routerLink]="['/app/utility']">View <i class="fas fa-angle-right"></i></button>
+            </div>
+            <div class="item py-1 px-0 item-bottom-border">
+              <div class="avatar avatar-sm bg-white border-danger">
+                <i class="fas fa-bolt text-danger"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-input-wrapper">
+                  <div class="item-label">
+                    <p class="mb-0 text-muted">Total Electricity Usage</p>
+                    <h2 class="mb-0">{{ gsDashboard?.rows[0].summarypower | number:'1.0-0' }} <span class="font-sm text-muted">kW</span></h2>
                   </div>
-                  <h1 class="item-end font-bold">15</h1>
+                </div>
+              </div>
+              <button class="btn btn-link item-end" [routerLink]="['/app/power']">View <i class="fas fa-angle-right"></i></button>
+            </div>
+            <div class="item py-1 px-0 item-bottom-border">
+              <div class="avatar avatar-sm bg-white border-info">
+                <i class="fas fa-tint text-info"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-input-wrapper">
+                  <div class="item-label">
+                    <p class="mb-0 text-muted">Total Water Usage</p>
+                    <h2 class="mb-0">{{ gsDashboard?.rows[0].summarywater | number:'1.0-0' }} <span class="font-sm text-muted">gal</span></h2>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-link item-end" [routerLink]="['/app/water']">View <i class="fas fa-angle-right"></i></button>
+            </div>
+            <div class="item py-1 px-0 item-bottom-border">
+              <div class="avatar avatar-sm bg-white border-success">
+                <i class="fas fa-fire text-success"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-input-wrapper">
+                  <div class="item-label">
+                    <p class="mb-0 text-muted">Total Gas Usage</p>
+                    <h2 class="mb-0">{{ gsDashboard?.rows[0].summarygas | number:'1.0-0' }} <span class="font-sm text-muted">feet<sup>3</sup></span></h2>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-link item-end" [routerLink]="['/app/gas']">View <i class="fas fa-angle-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" *ngIf="weatherDataReady">
+    <div class="card-block" *ngIf="weatherDataReady">
+      <h4 class="mb-0">Today in {{ gsDashboard?.rows[0].city }}, {{ gsDashboard?.rows[0].state }}</h4>
+      <div class="row align-items-center mt-3">
+        <div class="col-lg-2 col-md-12 col-12 text-center">
+          <div class="d-flex flex-row justify-content-center">
+            <div>
+              <h1 class="display-1 mb-0 text-secondary"><i class="wi {{weatherData?.day1Icon}}"></i></h1>
+              <p class="text-secondary mb-0">{{ weatherData?.hourly.summary }}</p>
+              <h1 class="mb-0 font-weight-light display-5">{{ weatherData?.daily?.data[0].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-secondary">{{ weatherData?.daily?.data[0].temperatureLow | number:'2.0-0' }}&#176;</span></h1>
+              <hr>
+              <p>Last Year: {{weatherDataLastYear?.daily?.data[0].temperatureHigh | number:'2.0-0'}} &#176; <span class="text-muted">{{weatherDataLastYear?.daily?.data[0].temperatureLow | number:'2.0-0'}} &#176;</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 text-center">
+          <div class="bg-gray-lightest border p-3">
+            <h2 class="h1 text-muted"><i class="wi wi-strong-wind"></i></h2>
+            <p class="mb-0 text-muted">Wind {{ weatherData?.day1WindDirection }}</p>
+            <p class="mb-0 h4">{{ weatherData?.daily?.data[0].windSpeed }} mph</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 text-center">
+          <div class="bg-gray-lightest border p-3">
+            <h2 class="h1 text-muted"><i class="wi wi-raindrops"></i></h2>
+            <p class="mb-0 text-muted">Dewpoint</p>
+            <p class="mb-0 h4">{{ weatherData?.daily?.data[0].dewPoint | number:'2.0-0' }}&#176;</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 text-center mt-3 mt-md-0 mt-lg-0">
+          <div class="bg-gray-lightest border p-3">
+            <h2 class="h1 text-muted"><i class="wi wi-humidity"></i></h2>
+            <p class="mb-0 text-muted">Humidity</p>
+            <p class="mb-0 h4">{{ weatherData?.daily?.data[0].humidity | percent:'2.0-1' }}</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 text-center mt-3 mt-lg-0">
+          <div class="bg-gray-lightest border p-3">
+            <h2 class="h1 text-muted"><i class="wi wi-sunrise"></i></h2>
+            <p class="mb-0 text-muted">Sunrise</p>
+            <p class="mb-0 h4">{{ weatherData?.day1SunriseTime }}</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 text-center mt-3 mt-lg-0">
+          <div class="bg-gray-lightest border p-3">
+            <h2 class="h1 text-muted"><i class="wi wi-sunset"></i></h2>
+            <p class="mb-0 text-muted">Sunset</p>
+            <p class="mb-0 h4">{{ weatherData?.day1SunsetTime }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer bg-dark text-light" *ngIf="weatherDataReady">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-4 text-center">
+                  <h5 class="text-light text-uppercase">{{ weatherData?.day2 }}</h5>
+                  <h1 class="mb-1 text-light"><i class="wi {{weatherData?.day2Icon}}"></i></h1>
+                  <h5 class="text-uppercase mb-0">{{ weatherData?.daily?.data[1].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-muted">{{ weatherData?.daily?.data[1].temperatureLow | number:'2.0-0' }}&#176;</span></h5>
+                </div>
+                <div class="col-4 text-center">
+                  <h5 class="text-light text-uppercase">{{ weatherData?.day3 }}</h5>
+                  <h1 class="mb-1 text-light"><i class="wi {{weatherData?.day3Icon}}"></i></h1>
+                  <h5 class="text-uppercase mb-0">{{ weatherData?.daily?.data[2].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-muted">{{ weatherData?.daily?.data[2].temperatureLow | number:'2.0-0' }}&#176;</span></h5>
+                </div>
+                <div class="col-4 text-center">
+                  <h5 class="text-light text-uppercase">{{ weatherData?.day4 }}</h5>
+                  <h1 class="mb-1 text-light"><i class="wi {{weatherData?.day4Icon}}"></i></h1>
+                  <h5 class="text-uppercase mb-0">{{ weatherData?.daily?.data[3].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-muted">{{ weatherData?.daily?.data[3].temperatureLow | number:'2.0-0' }}&#176;</span></h5>
+                </div>
+              </div>
+            </div>
+            <hr class="d-lg-none">
+            <div class="col-lg-6 mt-4 mt-lg-0">
+              <div class="row">
+                <div class="col-4 text-center">
+                  <h5 class="text-light text-uppercase">{{ weatherData?.day5 }}</h5>
+                  <h1 class="mb-1 text-light"><i class="wi {{weatherData?.day5Icon}}"></i></h1>
+                  <h5 class="text-uppercase mb-0">{{ weatherData?.daily?.data[4].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-muted">{{ weatherData?.daily?.data[4].temperatureLow | number:'2.0-0' }}&#176;</span></h5>
+                </div>
+                <div class="col-4 text-center">
+                  <h5 class="text-light text-uppercase">{{ weatherData?.day6 }}</h5>
+                  <h1 class="mb-1 text-light"><i class="wi {{weatherData?.day6Icon}}"></i></h1>
+                  <h5 class="text-uppercase mb-0">{{ weatherData?.daily?.data[5].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-muted">{{ weatherData?.daily?.data[5].temperatureLow | number:'2.0-0' }}&#176;</span></h5>
+                </div>
+                <div class="col-4 text-center">
+                  <h5 class="text-light text-uppercase">{{ weatherData?.day7 }}</h5>
+                  <h1 class="mb-1 text-light"><i class="wi {{weatherData?.day7Icon}}"></i></h1>
+                  <h5 class="text-uppercase mb-0">{{ weatherData?.daily?.data[6].temperatureHigh | number:'2.0-0' }}&#176; <span class="text-secondary">{{ weatherData?.daily?.data[6].temperatureLow | number:'2.0-0' }}&#176;</span></h5>
                 </div>
               </div>
             </div>

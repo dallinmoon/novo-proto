@@ -23,7 +23,6 @@ export class UtilityComponent implements OnInit {
 
   myData: any;
   gs: any;
-  gsSiteInfo: any;
   gsMeters: any;
   gsCalc: any;
   chart = [];
@@ -34,10 +33,6 @@ export class UtilityComponent implements OnInit {
   dataReady: boolean = false;
 
   ngOnInit(): void {
-
-    this._gsheet.gSheetSiteInfo().subscribe(res => {
-      this.gsSiteInfo = res;
-    });
 
     this._gsheet.gSheetMetersCalc().subscribe(res => {
       this.gsCalc = res;

@@ -41,3 +41,41 @@
 .bg-danger-darkest{
   background-color: darken($brand-danger, 50%);
 }
+
+.bg-success-lightest{
+  background-color: lighten($brand-success, 40%);
+}
+.bg-success-lighter{
+  background-color: lighten($brand-success, 33%);
+}
+.bg-success-light{
+  background-color: lighten($brand-success, 10%);
+}
+.bg-success-dark{
+  background-color: darken($brand-success, 10%);
+}
+.bg-success-darker{
+  background-color: darken($brand-success, 33%);
+}
+.bg-success-darkest{
+  background-color: darken($brand-success, 50%);
+}
+
+.bg-info-lightest{
+  background-color: lighten($brand-info, 40%);
+}
+.bg-info-lighter{
+  background-color: lighten($brand-info, 33%);
+}
+.bg-info-light{
+  background-color: lighten($brand-info, 10%);
+}
+.bg-info-dark{
+  background-color: darken($brand-info, 10%);
+}
+.bg-info-darker{
+  background-color: darken($brand-info, 33%);
+}
+.bg-info-darkest{
+  background-color: darken($brand-info, 50%);
+}

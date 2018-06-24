@@ -403,13 +403,6 @@ app-root {
 
     .usd-main {
 
-      .usd-content-area-standard .card{
-        margin-right: -15px;
-        margin-left: -15px;
-        border-left: none;
-        border-right: none;
-      }
-
       .card-group .card{
         margin:0;
       }
@@ -475,5 +468,12 @@ app-root {
   .usd-body .usd-main .usd-content-area-standard .card-group .card{
     margin-right: -15px;
     margin-left: -15px;
+  }
+
+  .usd-content-area-standard .card{
+    margin-right: -15px;
+    margin-left: -15px;
+    border-left: none;
+    border-right: none;
   }
 }

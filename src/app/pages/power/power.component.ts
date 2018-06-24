@@ -23,7 +23,7 @@ export class PowerComponent implements OnInit {
 
   myData: any;
   gs: any;
-  gsSiteInfo: any;
+  gsDashboard: any;
   gsMeters: any;
   gsCalc: any;
   chart = [];
@@ -115,8 +115,8 @@ export class PowerComponent implements OnInit {
   };
   public mainChart2Colours: Array<any> = [
     { // brandInfo
-      backgroundColor: this.convertHex(this.brandInfo, 10),
-      borderColor: this.brandInfo,
+      backgroundColor: this.convertHex(this.brandDanger, 10),
+      borderColor: this.brandDanger,
       pointHoverBackgroundColor: '#fff'
     },
     { // brandDanger
@@ -139,12 +139,12 @@ export class PowerComponent implements OnInit {
 	};
 	public barChartColors:Array<any> = [
 		{ // building
-			backgroundColor: 'rgba(0,143,224,0.5)',
-			borderColor: 'rgba(0,143,224,1)',
-			pointBackgroundColor: 'rgba(0,143,224,1)',
+			backgroundColor: 'rgba(220,53,69,0.5)',
+			borderColor: 'rgba(220,53,69,1)',
+			pointBackgroundColor: 'rgba(220,53,69,1)',
 			pointBorderColor: 'rgba(255,255,255,1)',
 			pointHoverBackgroundColor: 'rgba(255,255,255,1)',
-			pointHoverBorderColor: 'rgba(0,143,224,0.5)'
+			pointHoverBorderColor: 'rgba(220,53,69,0.5)'
 		}
 	];
 	public barChartLegend:boolean = true;
@@ -154,8 +154,8 @@ export class PowerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._gsheet.gSheetSiteInfo().subscribe(res => {
-      this.gsSiteInfo = res;
+    this._gsheet.gDashboard().subscribe(res => {
+      this.gsDashboard = res;
     });
 
     this._gsheet.gSheetMetersCalc().subscribe(res => {
@@ -169,9 +169,9 @@ export class PowerComponent implements OnInit {
             {
               type: 'bar',
               data: [res.rows[0].usagehist0, res.rows[0].usagehist1, res.rows[0].usagehist2, res.rows[0].usagehist3, res.rows[0].usagehist4, res.rows[0].usagehist5, res.rows[0].usagehist6, res.rows[0].usagehist7, res.rows[0].usagehist8, res.rows[0].usagehist9, res.rows[0].usagehist10, res.rows[0].usagehist11, res.rows[0].usagehist12],
-              borderColor: '#008FE0',
+              borderColor: 'rgb(220,53,69)',
               borderWidth: 1,
-              backgroundColor: 'rgba(0,143,224,0.5)',
+              backgroundColor: 'rgba(220,53,69,0.5)',
               label: 'Usage History'
             },
             {
